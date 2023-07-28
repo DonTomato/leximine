@@ -8,6 +8,7 @@
     <ItemGroup>
         <Compile Include="Book.fs" />
         <Compile Include="Fb2Parser.fs" />
+        <Compile Include="Snowball.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 
