@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "leximine", "leximine\leximine.fsproj", "{0A6E32BE-A0BF-4CFC-8349-6175DC9D61FE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0A6E32BE-A0BF-4CFC-8349-6175DC9D61FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A6E32BE-A0BF-4CFC-8349-6175DC9D61FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A6E32BE-A0BF-4CFC-8349-6175DC9D61FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A6E32BE-A0BF-4CFC-8349-6175DC9D61FE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

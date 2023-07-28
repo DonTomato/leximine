@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "mzb1ye0LNsRWri5yab+uh03lq/dG15UXJX0GHCPO5MLCCtbOEgkcw/AZjes18PFFhRWVeHV59wYmjSd+b5vOnQ==",
+  "success": true,
+  "projectFilePath": "C:\\code\\leximine\\fslex\\leximine\\leximine.fsproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\micha\\.nuget\\packages\\fsharp.core\\7.0.300\\fsharp.core.7.0.300.nupkg.sha512"
+  ],
+  "logs": []
+}
