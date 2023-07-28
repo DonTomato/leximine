@@ -2,6 +2,10 @@ module leximine.Fb2Parser
 
 open System.Xml.Linq
 
+let load (fn: string) =
+    let dataFromFile = XDocument.Load fn;
+    dataFromFile
+
 let parseData (data: XDocument) =
     let ns = data.Root.GetDefaultNamespace()
     
