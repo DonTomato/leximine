@@ -8,8 +8,13 @@
     <ItemGroup>
         <Compile Include="Book.fs" />
         <Compile Include="Fb2Parser.fs" />
+        <Compile Include="SentenceParser.fs" />
         <Compile Include="Snowball.fs" />
         <Compile Include="Program.fs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="StemmersNet.Standard" Version="1.1.1" />
     </ItemGroup>
 
 </Project>

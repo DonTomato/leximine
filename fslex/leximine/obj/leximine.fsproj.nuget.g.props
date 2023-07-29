@@ -13,6 +13,7 @@
     <SourceRoot Include="C:\Users\micha\.nuget\packages\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <PkgStemmersNet_Standard Condition=" '$(PkgStemmersNet_Standard)' == '' ">C:\Users\micha\.nuget\packages\stemmersnet.standard\1.1.1</PkgStemmersNet_Standard>
     <PkgFSharp_Core Condition=" '$(PkgFSharp_Core)' == '' ">C:\Users\micha\.nuget\packages\fsharp.core\7.0.300</PkgFSharp_Core>
   </PropertyGroup>
 </Project>

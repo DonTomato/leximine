@@ -5,8 +5,8 @@ open System.Text.RegularExpressions
 let private lowercase (word: string) =
     word.ToLower()
     
-let vowel = [ "a"; "e"; "i"; "o"; "u"; "y" ]
-let doubles = [ "bb"; "dd"; "ff"; "gg"; "mm"; "nn"; "pp"; "rr"; "tt" ]
+let private vowels = [ "a"; "e"; "i"; "o"; "u"; "y" ]
+let private doubles = [ "bb"; "dd"; "ff"; "gg"; "mm"; "nn"; "pp"; "rr"; "tt" ]
     
 let private removeSuffix (suffix: string) (word: string) =
     if word.EndsWith(suffix) then
@@ -31,6 +31,14 @@ let private step_0 word =
     [ "'"; "'s"; "'s'" ] |> removeSuffixes word
     
 let private step_1a (word: string) =
+    
+    let checkVowelPreceding beforeIndex =
+        match beforeIndex with
+        | b when b < 2 -> false
+        | _ ->
+               let s = word.Substring(0, beforeIndex - 1)
+               vowels |> List.map s.Contains |> List.contains true
+    
     match testSuffix word "sess" with
     | (true, index) -> $"{word.Substring(0, word.Length - index)}ss"
     | _ -> match testSuffix word "ied" with
@@ -40,11 +48,15 @@ let private step_1a (word: string) =
                   | _ -> match (testSuffix word "us", testSuffix word "ss") with
                          | ((a, _), (b, _)) when a || b -> word
                          | _ -> match testSuffix word "s" with
+                                | (true, index) -> if checkVowelPreceding index then replaceSuffix index "" word else word
                                 | _ -> word
-                                | _ -> word
+                                
+let private step_1b (word: string) =
+    word
 
 let snowballEn word =
     word
         |> lowercase
         |> step_0
         |> step_1a
+        |> step_1b
