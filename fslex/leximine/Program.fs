@@ -13,22 +13,30 @@ printfn $"Paragraphs count: {result.Paragraphs |> List.length}"
 
 printfn ""
 
-let p = result.Paragraphs[10]
+// let p = result.Paragraphs[10]
+//
+// printfn $"Paragraph 10: {p}"
+//
+// let words = p.Split(".") |> Seq.toList
+//             |> List.map (fun s -> s.Split(" ") |> Seq.toList)
+//             |> List.concat
+//             |> List.filter (fun w -> w <> "")
+//             |> List.map (fun w -> w.Trim())
+//
+// // for word in words do
+// //    printfn $"%s{word}: %s{leximine.Snowball.snowballEn word}"
+//
+// let stem = EnglishStemmer()
+//
+// let enWords = [ "jump"; "jumping"; "jumps"; "jumped" ]
+//
+// for word in enWords do
+//     printfn $"%s{word}: %s{stem.Stem(word)}"
 
-printfn $"Paragraph 10: {p}"
+let words = leximine.SentenceParser.parseBook result.Paragraphs
 
-let words = p.Split(".") |> Seq.toList
-            |> List.map (fun s -> s.Split(" ") |> Seq.toList)
-            |> List.concat
-            |> List.filter (fun w -> w <> "")
-            |> List.map (fun w -> w.Trim())
+let wordsCount = words |> List.length
+let words100 = words |> List.take 100
 
-// for word in words do
-//    printfn $"%s{word}: %s{leximine.Snowball.snowballEn word}"
-
-let stem = EnglishStemmer()
-
-let enWords = [ "jump"; "jumping"; "jumps"; "jumped" ]
-
-for word in enWords do
-    printfn $"%s{word}: %s{stem.Stem(word)}"
+for (w, count, _) in words100 do
+    printfn "%10i: %s" count w
