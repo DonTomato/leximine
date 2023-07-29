@@ -33,10 +33,14 @@ printfn ""
 // for word in enWords do
 //     printfn $"%s{word}: %s{stem.Stem(word)}"
 
-let words = leximine.SentenceParser.parseBook result.Paragraphs
+let (words, wordsCount) = leximine.SentenceParser.parseBook result.Paragraphs
 
-let wordsCount = words |> List.length
-let words100 = words |> List.take 100
+let uniqueWordsCount = words |> List.length
+let words100 = words |> List.skip 4000 |> List.take 100
+
+printfn "Count of words: %i" wordsCount
+printfn "Count of unique words: %i" uniqueWordsCount
+printfn ""
 
 for (w, count, _) in words100 do
-    printfn "%10i: %s" count w
+    printfn "%5i: %s" count w
