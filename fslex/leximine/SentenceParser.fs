@@ -9,9 +9,9 @@ let private trim (s: string) =
     s.Trim()
     
     
-let private excludeSymboldsFromWord = [ ","; "."; ";"; "-"; "`"; "\""; "'" ]
+let private excludeSymboldsFromWord = [ ","; "."; ";"; "-"; "`"; "\""; "'"; "–"; "’"; "‘"; ":"; "“"; "…"; "—" ]
     
-let private clearWord (w: string) =
+let clearWord (w: string) =
     let removeFromEnd = excludeSymboldsFromWord |> List.exists (fun s -> w.EndsWith(s))
     let mutable word = w
     if removeFromEnd then
@@ -22,7 +22,7 @@ let private clearWord (w: string) =
     word |> trim
     
 let private trimAndExcludeEmpty ls =
-    ls |> List.map (fun s -> trim s) |> List.filter (fun s -> s <> "")
+    ls |> List.map (fun s -> trim s) |> List.filter (fun s -> s.Length > 1)
     
 type SentenceData = {
     Sentence: string

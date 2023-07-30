@@ -42,5 +42,11 @@ printfn "Count of words: %i" wordsCount
 printfn "Count of unique words: %i" uniqueWordsCount
 printfn ""
 
-for (w, count, _) in words100 do
-    printfn "%5i: %s" count w
+for (w, count, wu) in words100 do
+    printfn "%5i: %20s:  %A" count w wu  
+    
+    
+let (ws, wsCount, wordsUsed) = words[4016]
+printfn ""
+printfn $"Words for index 4000: stemmed: {ws}"
+printfn $"Words used {leximine.SentenceParser.clearWord ws}"
