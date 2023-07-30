@@ -6,27 +6,35 @@ printfn "Leximine Parser"
 
 let data = leximine.Fb2Parser.load @"d:\temp\book\children_of_time.fb2"
 
-let result = leximine.Fb2Parser.parseData data
+let bookData = leximine.Fb2Parser.parseData data
 
-printfn $"Book of {result.Author}: {result.Title}"
-printfn $"Paragraphs count: {result.Paragraphs |> List.length}"
+printfn $"Book of {bookData.Author}: {bookData.Title}"
+printfn $"Paragraphs count: {bookData.Paragraphs |> List.length}"
 
 printfn ""
 
-let (words, wordsCount) = leximine.SentenceParser.parseBook result.Paragraphs
+let result = leximine.SentenceParser.parseBook bookData.Paragraphs
 
-let uniqueWordsCount = words |> List.length
-let words100 = words |> List.skip 4000 |> List.take 100
+let uniqueWordsCount = result.Words |> List.length
+let words100 = result.Words |> List.skip 4000 |> List.take 100
 
-printfn "Count of words: %i" wordsCount
+printfn "Count of words: %i" result.TotalWordsCount
 printfn "Count of unique words: %i" uniqueWordsCount
 printfn ""
 
-for (w, count, wu) in words100 do
-    printfn "%5i: %20s:  %A" count w wu  
+for wStat in words100 do
+    printfn "%5i: %20s:  %A" wStat.WordCount wStat.WordID wStat.Words  
     
     
-let (ws, wsCount, wordsUsed) = words[4016]
+let w = result.Words[4016]
 printfn ""
-printfn $"Words for index 4000: stemmed: {ws}"
-printfn $"Words used {leximine.SentenceParser.clearWord ws}"
+printfn $"Words for index 4000: stemmed: {w.WordID}"
+printfn $"Words used {leximine.SentenceParser.clearWord w.WordID}"
+
+let sentences4000 = result.SentenceData |> List.filter (fun (h, _) -> w.SentenceHashes |> List.contains h)
+                                        |> List.map (fun (_, s) -> s.Sentence) 
+
+printfn "Sentences"
+
+for s in sentences4000 do
+    printfn "  %s" s
