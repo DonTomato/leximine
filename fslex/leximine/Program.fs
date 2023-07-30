@@ -36,7 +36,7 @@ printfn ""
 let (words, wordsCount) = leximine.SentenceParser.parseBook result.Paragraphs
 
 let uniqueWordsCount = words |> List.length
-let words100 = words |> List.skip 4000 |> List.take 100
+let words100 = words |> List.skip 0 |> List.take 100
 
 printfn "Count of words: %i" wordsCount
 printfn "Count of unique words: %i" uniqueWordsCount

@@ -10,6 +10,27 @@ let private trim (s: string) =
     
     
 let private excludeSymboldsFromWord = [ ","; "."; ";"; "-"; "`"; "\""; "'"; "–"; "’"; "‘"; ":"; "“"; "…"; "—" ]
+
+let private excludeWords = [ "the"; "an"; "this"; "it";
+                             "her"; "him"; "his"; "he"; "she"; "they"; "you"; "them"; "we"; "me"; "those"; "us"
+                             "your"; "my";
+                             
+                             "is"; "was"; "were"; "have"; "has"; "had"; "be"; "are"; "been"; "will"; "would";
+                             "can"; "like"; "could"; "get"; "got"; "see"; "must";
+                             
+                             "of"; "to"; "and"; "that"; "in"; "for"; "with"; "but"; "as"; "not"; "on"; "their";
+                             "at"; "from"; "there"; "all"; "out"; "by"; "or"; "up"; "so"; "no"; "into"; "only"
+                             "here"; "down"; "then"; "than"; "even"; "about"; "over"; "only"; "through"; "befor";
+                             "after"; "off"; "which"; "most"; "becaus"; "already";
+                             
+                             "now"; "one"; "some"; "any"; "just"; "if"; "more"; "own"; "someth";
+                             "time"; "other"; "go"; "back"; "come"; "though"; "do"; "any";
+                             
+                             "it'";
+                             
+                             "what"; "when"; "who"; "how"; ]
+
+let private excludeNames = [ "holsten"; "lain"; "portia"; "guyen"; "bianca"; "karst" ]
     
 let clearWord (w: string) =
     let removeFromEnd = excludeSymboldsFromWord |> List.exists (fun s -> w.EndsWith(s))
@@ -76,6 +97,8 @@ let parseBook (paragraphs: string list) =
                 
     let data = words
                |> List.map (fun w -> (w, stem w))
+               |> List.filter (fun (_, ws) -> not (excludeWords |> List.contains ws))
+               |> List.filter (fun (_, ws) -> not (excludeNames |> List.contains ws))
                |> List.groupBy (fun (_, ws) -> ws)
                |> List.map (fun (key, values) -> (key, values |> List.length, values |> List.map (fun (w, _) -> w)))
                |> List.sortBy (fun (_, count, _) -> -count)
