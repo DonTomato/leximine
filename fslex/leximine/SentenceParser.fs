@@ -28,7 +28,7 @@ let private excludeWords = [ "the"; "an"; "this"; "it";
                              
                              "it'";
                              
-                             "what"; "when"; "who"; "how"; ]
+                             "what"; "when"; "who"; "how"; "whi" ]
 
 let private excludeNames = [ "holsten"; "lain"; "portia"; "guyen"; "bianca"; "karst" ]
     
@@ -100,7 +100,11 @@ let parseBook (paragraphs: string list) =
                |> List.filter (fun (_, ws) -> not (excludeWords |> List.contains ws))
                |> List.filter (fun (_, ws) -> not (excludeNames |> List.contains ws))
                |> List.groupBy (fun (_, ws) -> ws)
-               |> List.map (fun (key, values) -> (key, values |> List.length, values |> List.map (fun (w, _) -> w)))
+               |> List.map (fun (key, values) -> (
+                   key,
+                   values |> List.length,
+                   values |> List.map (fun (w, _) -> w) |> List.distinct)
+               )
                |> List.sortBy (fun (_, count, _) -> -count)
                
     (data, words |> Seq.length)
