@@ -6,6 +6,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Compile Include="db.fs" />
+        <Compile Include="DbLeximine.fs" />
         <Compile Include="Book.fs" />
         <Compile Include="Fb2Parser.fs" />
         <Compile Include="SentenceParser.fs" />
@@ -14,6 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.0-preview.6.23329.4" />
       <PackageReference Include="StemmersNet.Standard" Version="1.1.1" />
     </ItemGroup>
 

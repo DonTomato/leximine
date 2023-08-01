@@ -14,6 +14,7 @@
   </ItemGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <PkgStemmersNet_Standard Condition=" '$(PkgStemmersNet_Standard)' == '' ">C:\Users\micha\.nuget\packages\stemmersnet.standard\1.1.1</PkgStemmersNet_Standard>
+    <PkgMicrosoft_Data_Sqlite Condition=" '$(PkgMicrosoft_Data_Sqlite)' == '' ">C:\Users\micha\.nuget\packages\microsoft.data.sqlite\8.0.0-preview.6.23329.4</PkgMicrosoft_Data_Sqlite>
     <PkgFSharp_Core Condition=" '$(PkgFSharp_Core)' == '' ">C:\Users\micha\.nuget\packages\fsharp.core\7.0.300</PkgFSharp_Core>
   </PropertyGroup>
 </Project>
