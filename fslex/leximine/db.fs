@@ -1,5 +1,6 @@
 module leximine.db
 
+open System
 open Microsoft.Data.Sqlite
 
 let createCn fileName =
@@ -22,6 +23,12 @@ let query f (command: SqliteCommand) =
         while reader.Read() do
             yield f reader
     } |> Seq.toList
+    
+let queryScalar f (command: SqliteCommand) = f (command.ExecuteScalar())
 
 let execute (command: SqliteCommand) =
     command.ExecuteNonQuery()
+    
+let toLong (obj: Object) = obj :?> int64
+let toInt (obj: Object) = obj :?> int
+let toString (obj: Object) = obj :?> string
