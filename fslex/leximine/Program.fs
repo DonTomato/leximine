@@ -1,7 +1,7 @@
 ﻿module leximineapp
 
 open Iveonik.Stemmers
-open leximine.db as db
+open leximine.DbLeximine
 
 printfn "Leximine Parser"
 
@@ -44,14 +44,13 @@ for s in sentences4000 do
 
 use cn = leximine.db.createCn @"C:\data\leximine_dev.db"
 
-let r = cn
-        |> leximine.db.commnd @"
-            INSERT INTO book (lang, title, author, words_count, sentence_count, unique_words_count)
-            VALUES ($lang, $title, $author, $wc, $sc, $uwc)"
-        |> leximine.db.addParameter "$lang" "en"
-        |> leximine.db.addParameter "$title" bookData.Title
-        |> leximine.db.addParameter "$author" bookData.Author
-        |> leximine.db.addParameter "$wc" result.TotalWordsCount
-        |> leximine.db.addParameter "$sc" (result.SentenceData |> List.length)
-        |> leximine.db.addParameter "$uwc" uniqueWordsCount
-        |> leximine.db.execute
+let book = {
+    DbBook.Title = bookData.Title
+    Author = bookData.Author
+    Lang = Language.English
+    TotalWordsCount = result.TotalWordsCount
+    TotalSentenceCount = (result.SentenceData |> List.length)
+    UniqueWordsCount = uniqueWordsCount 
+}
+
+let bookId = cn |> saveBook book

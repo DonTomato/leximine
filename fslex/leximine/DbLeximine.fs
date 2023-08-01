@@ -19,6 +19,7 @@ type DbSentence = {
     Sentence: string
     Hash: string
     WordsCount: int
+    BookId: int64
 }
 
 let private getStrLang lang =
@@ -41,7 +42,19 @@ let saveBook book cn =
                    
         printfn "Save Book func result: %i" code
             
-        cn |> commnd "SELECT last_insert_rowid();" |> toLong
+        cn |> getLastID
             
 let saveSentence sentence cn =
-    0
+    let code = cn
+               |> commnd @"
+                    INSERT INTO sentence (sentence, hash, book_id, words_count)
+                    VALUES ($sentence, $hash, $bid, $wc)"
+               |> addParameter "$sentence" sentence.Sentence
+               |> addParameter "$hash" sentence.Hash
+               |> addParameter "$bid" sentence.BookId
+               |> addParameter "$wc" sentence.WordsCount
+               |> execute
+               
+    printfn "Save Sentence func result: %i" code
+    
+    cn |> getLastID

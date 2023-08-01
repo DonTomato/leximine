@@ -29,6 +29,12 @@ let queryScalar f (command: SqliteCommand) = f (command.ExecuteScalar())
 let execute (command: SqliteCommand) =
     command.ExecuteNonQuery()
     
+// Type Helpers
+    
 let toLong (obj: Object) = obj :?> int64
 let toInt (obj: Object) = obj :?> int
 let toString (obj: Object) = obj :?> string
+
+// Helpers
+
+let getLastID cn = cn |> commnd "SELECT last_insert_rowid();" |> toLong
