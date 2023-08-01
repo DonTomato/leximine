@@ -20,6 +20,7 @@ type DbSentence = {
     Hash: string
     WordsCount: int
     BookId: int64
+    Lang: Language
 }
 
 let private getStrLang lang =
@@ -27,7 +28,7 @@ let private getStrLang lang =
     | English -> "en"
     | Norwegian -> "no"
 
-let saveBook book cn =
+let saveBook (book: DbBook) cn =
         let code = cn
                    |> commnd @"
                         INSERT INTO book (lang, title, author, words_count, sentence_count, unique_words_count)
@@ -46,8 +47,8 @@ let saveBook book cn =
             
 let saveSentence sentence cn =
     let code = cn
-               |> commnd @"
-                    INSERT INTO sentence (sentence, hash, book_id, words_count)
+               |> commnd @$"
+                    INSERT INTO {(getStrLang sentence.Lang)}_sentence (sentence, hash, book_id, words_count)
                     VALUES ($sentence, $hash, $bid, $wc)"
                |> addParameter "$sentence" sentence.Sentence
                |> addParameter "$hash" sentence.Hash

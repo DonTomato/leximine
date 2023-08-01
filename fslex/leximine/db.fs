@@ -37,4 +37,4 @@ let toString (obj: Object) = obj :?> string
 
 // Helpers
 
-let getLastID cn = cn |> commnd "SELECT last_insert_rowid();" |> toLong
+let getLastID cn = cn |> commnd "SELECT last_insert_rowid();" |> queryScalar toLong

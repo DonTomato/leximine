@@ -54,3 +54,15 @@ let book = {
 }
 
 let bookId = cn |> saveBook book
+
+let sentences = result.SentenceData
+                |> List.map (fun (_, s) -> {
+                    DbSentence.Sentence = s.Sentence
+                    Hash = s.Hash.ToString("x")
+                    BookId = bookId
+                    WordsCount = s.WordCount
+                    Lang = Language.English 
+                })
+                |> List.map (fun s ->
+                    let sid = cn |> saveSentence s
+                    (sid, s.Hash, s))
