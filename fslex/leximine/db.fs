@@ -38,3 +38,6 @@ let toString (obj: Object) = obj :?> string
 // Helpers
 
 let getLastID cn = cn |> commnd "SELECT last_insert_rowid();" |> queryScalar toLong
+
+let transaction (cn: SqliteConnection) = cn.BeginTransaction()
+let commit (transaction: SqliteTransaction) = transaction.Commit() 

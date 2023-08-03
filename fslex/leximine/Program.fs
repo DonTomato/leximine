@@ -2,6 +2,7 @@
 
 open Iveonik.Stemmers
 open leximine.DbLeximine
+open leximine.db
 
 printfn "Leximine Parser"
 
@@ -53,6 +54,8 @@ let book = {
     UniqueWordsCount = uniqueWordsCount 
 }
 
+let tr = cn |> transaction
+
 let bookId = cn |> saveBook book
 
 let sentences = result.SentenceData
@@ -66,3 +69,5 @@ let sentences = result.SentenceData
                 |> List.map (fun s ->
                     let sid = cn |> saveSentence s
                     (sid, s.Hash, s))
+
+tr |> commit
