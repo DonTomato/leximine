@@ -572,6 +572,57 @@
           }
         }
       },
+      "System.Data.HashFunction.Core/2.0.0": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "System.Data.HashFunction.Interfaces": "2.0.0",
+          "System.Runtime.Numerics": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard1.1/System.Data.HashFunction.Core.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard1.1/System.Data.HashFunction.Core.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "System.Data.HashFunction.Interfaces/2.0.0": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1"
+        },
+        "compile": {
+          "lib/netstandard1.1/System.Data.HashFunction.Interfaces.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard1.1/System.Data.HashFunction.Interfaces.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "System.Data.HashFunction.Jenkins/2.0.0": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "System.Data.HashFunction.Core": "2.0.0"
+        },
+        "compile": {
+          "lib/netstandard1.1/System.Data.HashFunction.Jenkins.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard1.1/System.Data.HashFunction.Jenkins.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.Diagnostics.Debug/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -2254,6 +2305,51 @@
         "ref/xamarinwatchos10/_._",
         "system.console.4.3.0.nupkg.sha512",
         "system.console.nuspec"
+      ]
+    },
+    "System.Data.HashFunction.Core/2.0.0": {
+      "sha512": "EOb5GB6QTumYBvl0P/uL1m8hVkUwdwnIiwYPzfRKn+zZPtVkruyOrl/cMnNOGRny68xkswvOSo9NytWoR/6ABw==",
+      "type": "package",
+      "path": "system.data.hashfunction.core/2.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net45/System.Data.HashFunction.Core.dll",
+        "lib/net45/System.Data.HashFunction.Core.xml",
+        "lib/netstandard1.1/System.Data.HashFunction.Core.dll",
+        "lib/netstandard1.1/System.Data.HashFunction.Core.xml",
+        "system.data.hashfunction.core.2.0.0.nupkg.sha512",
+        "system.data.hashfunction.core.nuspec"
+      ]
+    },
+    "System.Data.HashFunction.Interfaces/2.0.0": {
+      "sha512": "ESxg15JHcRWXfRgzVUF8FhRZ1xAuXo6zgaL4kCdB9DV2cnrAwRGiycCMlMsfOLXOMrkHZZbcBuKlO8pyxDCCOg==",
+      "type": "package",
+      "path": "system.data.hashfunction.interfaces/2.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net45/System.Data.HashFunction.Interfaces.dll",
+        "lib/net45/System.Data.HashFunction.Interfaces.xml",
+        "lib/netstandard1.1/System.Data.HashFunction.Interfaces.dll",
+        "lib/netstandard1.1/System.Data.HashFunction.Interfaces.xml",
+        "system.data.hashfunction.interfaces.2.0.0.nupkg.sha512",
+        "system.data.hashfunction.interfaces.nuspec"
+      ]
+    },
+    "System.Data.HashFunction.Jenkins/2.0.0": {
+      "sha512": "nwmPsEePN3xOaQO7ZT8DOnKSx/Zkku+CjkQ9IceZ0iv6hKVCSyJRUH1pR2+pq2fpAYk+2McbJsuplGF7fqIdUg==",
+      "type": "package",
+      "path": "system.data.hashfunction.jenkins/2.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net45/System.Data.HashFunction.Jenkins.dll",
+        "lib/net45/System.Data.HashFunction.Jenkins.xml",
+        "lib/netstandard1.1/System.Data.HashFunction.Jenkins.dll",
+        "lib/netstandard1.1/System.Data.HashFunction.Jenkins.xml",
+        "system.data.hashfunction.jenkins.2.0.0.nupkg.sha512",
+        "system.data.hashfunction.jenkins.nuspec"
       ]
     },
     "System.Diagnostics.Debug/4.3.0": {
@@ -5002,7 +5098,8 @@
     "net7.0": [
       "FSharp.Core >= 7.0.300",
       "Microsoft.Data.Sqlite >= 8.0.0-preview.6.23329.4",
-      "StemmersNet.Standard >= 1.1.1"
+      "StemmersNet.Standard >= 1.1.1",
+      "System.Data.HashFunction.Jenkins >= 2.0.0"
     ]
   },
   "packageFolders": {
@@ -5052,6 +5149,11 @@
           "StemmersNet.Standard": {
             "target": "Package",
             "version": "[1.1.1, )",
+            "generatePathProperty": true
+          },
+          "System.Data.HashFunction.Jenkins": {
+            "target": "Package",
+            "version": "[2.0.0, )",
             "generatePathProperty": true
           }
         },

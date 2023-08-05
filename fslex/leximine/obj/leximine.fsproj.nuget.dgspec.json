@@ -49,6 +49,11 @@
               "target": "Package",
               "version": "[1.1.1, )",
               "generatePathProperty": true
+            },
+            "System.Data.HashFunction.Jenkins": {
+              "target": "Package",
+              "version": "[2.0.0, )",
+              "generatePathProperty": true
             }
           },
           "imports": [

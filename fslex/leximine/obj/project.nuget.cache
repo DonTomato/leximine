@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "GCzRnVHbUJe2ycMbzYJ5CWMAvsEmw8o6tm0/fbjDpVZIm/iHRXvUBoAVfuD4irzrGGqRiVYvbZml2zpcKBR/SQ==",
+  "dgSpecHash": "8f757jkhm8xHCZ9swr+IV8JNwwu5DTEyy5vGdIErUJXrI/qEiCGejLXzZK30skbXi94+4fXFpFz5dhikCVhZDg==",
   "success": true,
   "projectFilePath": "C:\\code\\leximine\\fslex\\leximine\\leximine.fsproj",
   "expectedPackageFiles": [
@@ -37,6 +37,9 @@
     "C:\\Users\\micha\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
     "C:\\Users\\micha\\.nuget\\packages\\system.collections.concurrent\\4.3.0\\system.collections.concurrent.4.3.0.nupkg.sha512",
     "C:\\Users\\micha\\.nuget\\packages\\system.console\\4.3.0\\system.console.4.3.0.nupkg.sha512",
+    "C:\\Users\\micha\\.nuget\\packages\\system.data.hashfunction.core\\2.0.0\\system.data.hashfunction.core.2.0.0.nupkg.sha512",
+    "C:\\Users\\micha\\.nuget\\packages\\system.data.hashfunction.interfaces\\2.0.0\\system.data.hashfunction.interfaces.2.0.0.nupkg.sha512",
+    "C:\\Users\\micha\\.nuget\\packages\\system.data.hashfunction.jenkins\\2.0.0\\system.data.hashfunction.jenkins.2.0.0.nupkg.sha512",
     "C:\\Users\\micha\\.nuget\\packages\\system.diagnostics.debug\\4.3.0\\system.diagnostics.debug.4.3.0.nupkg.sha512",
     "C:\\Users\\micha\\.nuget\\packages\\system.diagnostics.diagnosticsource\\4.3.0\\system.diagnostics.diagnosticsource.4.3.0.nupkg.sha512",
     "C:\\Users\\micha\\.nuget\\packages\\system.diagnostics.tools\\4.3.0\\system.diagnostics.tools.4.3.0.nupkg.sha512",

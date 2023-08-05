@@ -1,6 +1,7 @@
 module leximine.SentenceParser
 
 open Iveonik.Stemmers
+open leximine.Helpers
 
 let private split (s: string) (str: string) =
     str.Split(s) |> Seq.toList
@@ -49,7 +50,7 @@ type SentenceData = {
     Sentence: string
     WordCount: int
     Words: string list
-    Hash: int
+    Hash: string
 }
 
 type WordData = {
@@ -62,13 +63,13 @@ type BookWordsResult = {
     WordID: string
     WordCount: int
     Words: string list
-    SentenceHashes: int list
+    SentenceHashes: string list
 }
 
 type BookParseResult = {
     Words: BookWordsResult list
     TotalWordsCount: int
-    SentenceData: (int * SentenceData) list
+    SentenceData: (string * SentenceData) list
 }
 
 let private enStem = EnglishStemmer()
@@ -88,7 +89,7 @@ let private getSentenceStatistic sentence =
     let words = sentence |> parseSentence
     {
         Sentence = sentence;
-        Hash = System.HashCode.Combine(sentence);
+        Hash = jenkinsHash sentence;
         WordCount = List.length words
         Words = words
     }

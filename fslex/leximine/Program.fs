@@ -61,10 +61,9 @@ let bookId = cn |> saveBook book
 let sentences = result.SentenceData
                 |> List.map (fun (_, s) -> {
                     DbSentence.Sentence = s.Sentence
-                    Hash = s.Hash.ToString("x")
+                    Hash = s.Hash
                     BookId = bookId
-                    WordsCount = s.WordCount
-                    Lang = Language.English 
+                    WordsCount = s.WordCount 
                 })
                 |> List.map (fun s ->
                     let sid = cn |> saveSentence s

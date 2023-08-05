@@ -6,6 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Compile Include="Helpers.fs" />
         <Compile Include="db.fs" />
         <Compile Include="DbLeximine.fs" />
         <Compile Include="Book.fs" />
@@ -18,6 +19,7 @@
     <ItemGroup>
       <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.0-preview.6.23329.4" />
       <PackageReference Include="StemmersNet.Standard" Version="1.1.1" />
+      <PackageReference Include="System.Data.HashFunction.Jenkins" Version="2.0.0" />
     </ItemGroup>
 
 </Project>
