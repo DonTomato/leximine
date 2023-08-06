@@ -2,14 +2,9 @@ module leximine.DbLeximine
 
 open leximine.db
 
-type Language =
-    | English
-    | Norwegian
-
 type DbBook = {
     Title: string
     Author: string
-    Lang: Language
     TotalWordsCount: int
     TotalSentenceCount: int
     UniqueWordsCount: int
@@ -22,17 +17,11 @@ type DbSentence = {
     BookId: int64
 }
 
-let private getStrLang lang =
-    match lang with
-    | English -> "en"
-    | Norwegian -> "no"
-
 let saveBook (book: DbBook) cn =
         let code = cn
-                   |> commnd @"
-                        INSERT INTO book (lang, title, author, words_count, sentence_count, unique_words_count)
-                        VALUES ($lang, $title, $author, $wc, $sc, $uwc)"
-                   |> addParameter "$lang" (getStrLang book.Lang)
+                   |> command @"
+                        INSERT INTO book (title, author, words_count, sentence_count, unique_words_count)
+                        VALUES ($title, $author, $wc, $sc, $uwc)"
                    |> addParameter "$title" book.Title
                    |> addParameter "$author" book.Author
                    |> addParameter "$wc" book.TotalWordsCount
@@ -46,7 +35,7 @@ let saveBook (book: DbBook) cn =
             
 let saveSentence sentence cn =
     let code = cn
-               |> commnd @$"
+               |> command @$"
                     INSERT INTO sentence (sentence, hash, book_id, words_count)
                     VALUES ($sentence, $hash, $bid, $wc)"
                |> addParameter "$sentence" sentence.Sentence

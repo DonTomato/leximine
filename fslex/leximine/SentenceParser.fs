@@ -111,16 +111,6 @@ let parseBook (paragraphs: string list) =
     let sentencesData = sentences
                         |> List.groupBy (fun ss -> ss.Hash)
                         |> List.map (fun (key, values) -> (key, values[0]))
-                        
-    // let same = sentences
-    //                     |> List.groupBy (fun ss -> ss.Hash)
-    //                     |> List.map (fun (key, values) -> (key, (values |> List.length, values |> List.map (fun x -> x.Sentence))))
-    //                     |> List.filter (fun (_, (count, _)) -> count > 1)
-    //                     
-    // for (hash, (count, sameS)) in same do
-    //     printfn "SAME with hash = %10i" hash
-    //     for s in sameS do
-    //         printfn "    %s" s
                     
     let words = sentences
                 |> List.map (fun ss -> ss.Words |> List.map (fun w -> (w, ss.Hash))) |> List.concat

@@ -8,7 +8,7 @@ let createCn fileName =
     cn.Open()
     cn
     
-let commnd sql (cn: SqliteConnection) =
+let command sql (cn: SqliteConnection) =
     let command = cn.CreateCommand()
     command.CommandText <- sql
     command
@@ -37,7 +37,7 @@ let toString (obj: Object) = obj :?> string
 
 // Helpers
 
-let getLastID cn = cn |> commnd "SELECT last_insert_rowid();" |> queryScalar toLong
+let getLastID cn = cn |> command "SELECT last_insert_rowid();" |> queryScalar toLong
 
 let transaction (cn: SqliteConnection) = cn.BeginTransaction()
 let commit (transaction: SqliteTransaction) = transaction.Commit() 

@@ -2,7 +2,7 @@ CREATE TABLE "book" (
 	"id"	INTEGER,
 	"title"	TEXT NOT NULL,
 	"author"	TEXT,
-	"words_count"	INTEGER NOT NULL DEFAULT 0,
+	"total_words_count"	INTEGER NOT NULL DEFAULT 0,
 	"sentence_count"	INTEGER NOT NULL DEFAULT 0,
 	"unique_words_count"	INTEGER NOT NULL DEFAULT 0,
 	PRIMARY KEY("id" AUTOINCREMENT)
@@ -17,7 +17,6 @@ CREATE TABLE "sentence" (
 
 CREATE TABLE "word" (
 	"word_id"	TEXT,
-	"word_example"	TEXT,
 	"total_count"	INTEGER NOT NULL DEFAULT 0,
 	PRIMARY KEY("word_id")
 );
