@@ -13,6 +13,26 @@ type DbWordForm = {
     Count: int
 }
 
+type DbWordBook = {
+    WordId: string
+    Count: int
+}
+
+type DbWordFormBook = {
+    WordForm: string
+    Count: int
+}
+
+let readAllWordId cn =
+    cn
+    |> command @"SELECT word_id FROM word"
+    |> query (fun read -> read.string "word_id")
+    
+let readAllWordForms cn =
+    cn
+    |> command "SELECT id FROM word_form"
+    |> query (fun read -> read.string "id")
+
 let saveWord (word: DbWord) cn =
     let code = cn
                |> command @$"
@@ -35,3 +55,27 @@ let saveWordForm (word: DbWordForm) cn =
                |> execute
                
     printfn "Save Word Form func result: %i" code
+    
+let saveWordBook (word: DbWordBook) (bookId: int) cn =
+    let code = cn
+               |> command @"
+                    INSERT INTO book_word (book_id, word_id, count)
+                    VALUES ($book_id, $word_id, $count)"
+               |> addParameter "$book_id" bookId
+               |> addParameter "$word_id" word.WordId
+               |> addParameter "$count" word.Count
+               |> execute
+               
+    printfn "Save Word for Book func result: %i" code
+    
+let saveWordFormBook (word: DbWordFormBook) (bookId: int) cn =
+    let code = cn
+               |> command @"
+                    INSERT INTO book_word_form (book_id, word_form_id, count)
+                    VALUES ($book_id, $word_form, $count)"
+               |> addParameter "$book_id" bookId
+               |> addParameter "$word_form" word.WordForm
+               |> addParameter "$count" word.Count
+               |> execute
+               
+    printfn "Save Word Form for Book func result: %i" code
