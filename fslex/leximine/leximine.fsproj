@@ -8,14 +8,14 @@
     <ItemGroup>
         <Compile Include="Helpers.fs" />
         <Compile Include="db.fs" />
+        <Compile Include="Db\Book.fs" />
+        <Compile Include="Db\DbSentence.fs" />
+        <Compile Include="Db\DbWord.fs" />
         <Compile Include="DbLeximine.fs" />
         <Compile Include="Book.fs" />
         <Compile Include="Fb2Parser.fs" />
         <Compile Include="SentenceParser.fs" />
         <Compile Include="BookStatisticSaver.fs" />
-        <Compile Include="Db\Book.fs" />
-        <Compile Include="Db\DbSentence.fs" />
-        <Compile Include="Db\DbWord.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 

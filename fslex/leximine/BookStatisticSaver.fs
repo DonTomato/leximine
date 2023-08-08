@@ -36,12 +36,12 @@ let processBook fileName dbPath (stem: StemFn) =
     log "Unique words" uniqueWordCountInBook
     
     // Save book
-    let bookId = cn |> DbLeximine.saveBook {
+    let bookId = cn |> Db.Book.saveBook {
         Title = bookData.Title
         Author = bookData.Author
         TotalSentenceCount = sentenceTotalCountInBook
         TotalWordsCount = wordTotalCountInBook
-        UniqueWordsCount = uniqueWordCountInBook 
+        UniqueWordsCount = uniqueWordCountInBook
     }
     
     // Parse words
