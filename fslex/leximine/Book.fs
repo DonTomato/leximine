@@ -5,3 +5,5 @@ type BookData = {
     Author: string
     Paragraphs: string list
 }
+
+type StemFn = string -> string

@@ -1,4 +1,4 @@
-module leximine.Db.DbSentence
+module leximine.DbLeximine.Sentence
 
 open leximine.db
 

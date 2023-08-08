@@ -12,11 +12,11 @@
         <Compile Include="Book.fs" />
         <Compile Include="Fb2Parser.fs" />
         <Compile Include="SentenceParser.fs" />
-        <Compile Include="Snowball.fs" />
-        <Compile Include="Program.fs" />
+        <Compile Include="BookStatisticSaver.fs" />
         <Compile Include="Db\Book.fs" />
         <Compile Include="Db\DbSentence.fs" />
         <Compile Include="Db\DbWord.fs" />
+        <Compile Include="Program.fs" />
     </ItemGroup>
 
     <ItemGroup>

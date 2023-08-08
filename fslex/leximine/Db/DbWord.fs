@@ -1,4 +1,4 @@
-module leximine.Db.DbWord
+module leximine.DbLeximine.Word
 
 open leximine.db
 

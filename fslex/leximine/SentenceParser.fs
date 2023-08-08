@@ -2,6 +2,7 @@ module leximine.SentenceParser
 
 open Iveonik.Stemmers
 open leximine.Helpers
+open leximine.Book
 
 let private split (s: string) (str: string) =
     str.Split(s) |> Seq.toList
@@ -73,8 +74,6 @@ type BookParseResult = {
 }
 
 let private enStem = EnglishStemmer()
-
-type StemFn = string -> string
 
 let stemEn word =
     enStem.Stem(word)

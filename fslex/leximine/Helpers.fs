@@ -10,3 +10,5 @@ let jenkinsHash (s: string) =
     let bytes = encoding.GetBytes(s)
     instance.ComputeHash(bytes).AsHexString()
     
+let log label value =
+    printfn "%-50s %7i" (sprintf "%s:" label) value 
