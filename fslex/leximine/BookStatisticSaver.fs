@@ -77,4 +77,22 @@ let processBook fileName dbPath (stem: StemFn) =
     
     log "New Word Forms" (newWordForms |> List.length)
     
+    let existingSentenceHashes = cn |> Db.Sentence.readAllSentenceHashes
+    
+    let newSentences = sentenceStat
+                       |> SentenceParser.getNewSentences existingSentenceHashes
+    
+    newSentences |> List.iter (fun s ->
+        cn
+        |> Db.Sentence.saveSentence {
+            Id = s.Hash
+            Sentence = s.Sentence
+            WordsCount = s.WordCount 
+        }
+        |> ignore)
+    
+    log "New Sentences" (newSentences |> List.length)
+    
+    
+    
     transaction |> db.commit

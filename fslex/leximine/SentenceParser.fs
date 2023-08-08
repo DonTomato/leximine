@@ -11,26 +11,28 @@ let private trim (s: string) =
     s.Trim()
     
     
-let private excludeSymboldsFromWord = [ ","; "."; ";"; "-"; "`"; "\""; "'"; "–"; "’"; "‘"; ":"; "“"; "…"; "—" ]
+let private excludeSymboldsFromWord = [ ","; "."; ";"; "-"; "`"; "\""; "'"; "–"; "’"; "‘"; ":"; "“"; "…"; "—"; "("; ")" ]
 
-let private excludeWords = [ "the"; "an"; "this"; "it";
-                             "her"; "him"; "his"; "he"; "she"; "they"; "you"; "them"; "we"; "me"; "those"; "us"
-                             "your"; "my";
-                             
-                             "is"; "was"; "were"; "have"; "has"; "had"; "be"; "are"; "been"; "will"; "would";
-                             "can"; "like"; "could"; "get"; "got"; "see"; "must";
-                             
-                             "of"; "to"; "and"; "that"; "in"; "for"; "with"; "but"; "as"; "not"; "on"; "their";
-                             "at"; "from"; "there"; "all"; "out"; "by"; "or"; "up"; "so"; "no"; "into"; "only"
-                             "here"; "down"; "then"; "than"; "even"; "about"; "over"; "only"; "through"; "befor";
-                             "after"; "off"; "which"; "most"; "becaus"; "already";
-                             
-                             "now"; "one"; "some"; "any"; "just"; "if"; "more"; "own"; "someth";
-                             "time"; "other"; "go"; "back"; "come"; "though"; "do"; "any";
-                             
-                             "it'";
-                             
-                             "what"; "when"; "who"; "how"; "whi" ]
+// let private excludeWords = [ "the"; "an"; "this"; "it";
+//                              "her"; "him"; "his"; "he"; "she"; "they"; "you"; "them"; "we"; "me"; "those"; "us"
+//                              "your"; "my";
+//                              
+//                              "is"; "was"; "were"; "have"; "has"; "had"; "be"; "are"; "been"; "will"; "would";
+//                              "can"; "like"; "could"; "get"; "got"; "see"; "must";
+//                              
+//                              "of"; "to"; "and"; "that"; "in"; "for"; "with"; "but"; "as"; "not"; "on"; "their";
+//                              "at"; "from"; "there"; "all"; "out"; "by"; "or"; "up"; "so"; "no"; "into"; "only"
+//                              "here"; "down"; "then"; "than"; "even"; "about"; "over"; "only"; "through"; "befor";
+//                              "after"; "off"; "which"; "most"; "becaus"; "already";
+//                              
+//                              "now"; "one"; "some"; "any"; "just"; "if"; "more"; "own"; "someth";
+//                              "time"; "other"; "go"; "back"; "come"; "though"; "do"; "any";
+//                              
+//                              "it'";
+//                              
+//                              "what"; "when"; "who"; "how"; "whi" ]
+
+let private excludeWords = []
 
 let private excludeNames = [ "holsten"; "lain"; "portia"; "guyen"; "bianca"; "karst" ]
     
