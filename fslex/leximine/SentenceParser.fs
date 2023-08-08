@@ -142,7 +142,7 @@ let parseBookToSentenceStatisic (paragraphs: string list) =
     
     result
     
-let getNewWords existingWords nSentences (stem: StemFn) =
+let getNewWords existingWords (stem: StemFn) nSentences =
     let result = nSentences
                  |> List.map (fun s -> s.WordForms)
                  |> List.concat
@@ -154,7 +154,7 @@ let getNewWords existingWords nSentences (stem: StemFn) =
                  
     result
     
-let getNewWordForms existingWordForms nSentences (stem: StemFn) =
+let getNewWordForms existingWordForms (stem: StemFn) nSentences =
     nSentences
     |> List.map (fun s -> s.WordForms)
     |> List.concat

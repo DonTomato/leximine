@@ -27,12 +27,19 @@ type SqliteReaderHelper = {
 let query f (command: SqliteCommand) =
     use reader = command.ExecuteReader()
     let tableSchema = reader.GetSchemaTable()
-    let columns = tableSchema.Columns
-                  |> Seq.cast<DataColumn>
-                  |> Seq.map (fun c -> c.ColumnName)
+    // let columns = tableSchema.Columns
+    //               |> Seq.cast<DataColumn>
+    //               |> Seq.map (fun c -> c.ColumnName)
+    //               |> Seq.toList
+                  
+    let columns = tableSchema.Rows
+                  |> Seq.cast<DataRow>
+                  |> Seq.map (fun r -> (r.["ColumnOrdinal"] :?> int, r.["ColumnName"] :?> string))
                   |> Seq.toList
                   
-    let getIndex columnName = columns |> List.findIndex (fun c -> c = columnName)
+    let getIndex columnName =
+        let (i, _) = columns |> List.find (fun (i, c) -> c = columnName)
+        i
                   
     let r = {
         int = fun columnName -> reader.GetInt32(getIndex columnName)

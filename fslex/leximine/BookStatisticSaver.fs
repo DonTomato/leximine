@@ -46,6 +46,35 @@ let processBook fileName dbPath (stem: StemFn) =
     
     // Parse words
     
-    // let existingWords = DbLeximine.Book.
+    let existingWords = cn |> Db.Word.readAllWordId
+    
+    let newWords = sentenceStat |> SentenceParser.getNewWords existingWords stem
+    
+    newWords
+    |> List.iter (fun w ->
+        cn
+        |> Db.Word.saveWord {
+            WordId = w
+            TotalCount = 0
+        }
+        |> ignore)
+    
+    log "New Words" (newWords |> List.length)
+    
+    // Parse words forms
+    
+    let existingWordForms = cn |> Db.Word.readAllWordForms
+    
+    let newWordForms = sentenceStat |> SentenceParser.getNewWordForms existingWordForms stem
+    newWordForms |> List.iter (fun (wf, w) ->
+        cn
+        |> Db.Word.saveWordForm {
+            WordId = w
+            Word = wf
+            Count = 0 
+        }
+        |> ignore)
+    
+    log "New Word Forms" (newWordForms |> List.length)
     
     transaction |> db.commit
