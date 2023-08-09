@@ -18,7 +18,7 @@ let processBook fileName dbPath (stem: StemFn) =
     log "Book paragraphs" (bookData.Paragraphs |> List.length)
     
     // Get sentence statistics
-    let sentenceStat = SentenceParser.parseBookToSentenceStatisic bookData.Paragraphs
+    let sentenceStat = SentenceParser.parseBookToSentenceStatistic bookData.Paragraphs stem
     
     let sentenceTotalCountInBook = sentenceStat |> List.length
     let wordTotalCountInBook = sentenceStat
@@ -27,7 +27,7 @@ let processBook fileName dbPath (stem: StemFn) =
     let uniqueWordCountInBook = sentenceStat
                                 |> List.map (fun s -> s.WordForms)
                                 |> List.concat
-                                |> List.map (fun s -> stem s)
+                                |> List.map (fun s -> s.WordID)
                                 |> List.distinct
                                 |> List.length
     
@@ -65,12 +65,12 @@ let processBook fileName dbPath (stem: StemFn) =
     
     let existingWordForms = cn |> Db.Word.readAllWordForms
     
-    let newWordForms = sentenceStat |> SentenceParser.getNewWordForms existingWordForms stem
-    newWordForms |> List.iter (fun (wf, w) ->
+    let newWordForms = sentenceStat |> SentenceParser.getNewWordForms existingWordForms
+    newWordForms |> List.iter (fun w ->
         cn
         |> Db.Word.saveWordForm {
-            WordId = w
-            Word = wf
+            WordId = w.WordID
+            Word = w.WordForm
             Count = 0 
         }
         |> ignore)

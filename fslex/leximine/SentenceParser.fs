@@ -49,10 +49,15 @@ let clearWord (w: string) =
 let private trimAndExcludeEmpty ls =
     ls |> List.map (fun s -> trim s) |> List.filter (fun s -> s.Length > 1)
     
+type SentenceWord = {
+    WordID: string
+    WordForm: string
+}
+    
 type SentenceData = {
     Sentence: string
     WordCount: int
-    WordForms: string list
+    WordForms: SentenceWord list
     Hash: string
 }
 
@@ -88,16 +93,19 @@ let parseSentence (sentence: string) =
                 |> trimAndExcludeEmpty
     words
 
-let private getSentenceStatistic sentence =
+let private getSentenceStatistic (stem: StemFn) sentence =
     let words = sentence |> parseSentence
     {
         Sentence = sentence;
         Hash = jenkinsHash sentence;
         WordCount = List.length words
-        WordForms = words
+        WordForms = words |> List.map (fun w -> {
+            WordID = stem w
+            WordForm = w 
+        })
     }
     
-let parseParagraph (p: string) =
+let parseParagraph (stem: StemFn) (p: string) =
     let sentences = p
                     |> split "."
                     |> List.map (fun l -> l |> split "!")
@@ -105,42 +113,42 @@ let parseParagraph (p: string) =
                     |> List.map (fun l -> l |> split "?")
                     |> List.concat
                     |> trimAndExcludeEmpty
-    sentences |> List.map getSentenceStatistic
+    sentences |> List.map (fun s -> getSentenceStatistic stem s)
     
 // Obsolete
-let parseBook (paragraphs: string list) =
-    let sentences = paragraphs
-                    |> List.map parseParagraph |> List.concat
-                    
-    let sentencesData = sentences
-                        |> List.groupBy (fun ss -> ss.Hash)
-                        |> List.map (fun (key, values) -> (key, values[0]))
-                    
-    let words = sentences
-                |> List.map (fun ss -> ss.WordForms |> List.map (fun w -> (w, ss.Hash))) |> List.concat
-                
-    let data = words
-               |> List.map (fun (w, ss) -> (w, stemEn w, ss))
-               |> List.filter (fun (_, ws, _) -> not (excludeWords |> List.contains ws))
-               |> List.filter (fun (_, ws, _) -> not (excludeNames |> List.contains ws))
-               |> List.groupBy (fun (_, ws, _) -> ws)
-               |> List.map (fun (key, values) -> {
-                   BookWordsResult.WordID = key
-                   WordCount = values |> List.length
-                   Words = values |> List.map (fun (w, _, _) -> w) |> List.distinct
-                   SentenceHashes = values |> List.map (fun (_, _, ss) -> ss)
-               })
-               |> List.sortBy (fun x -> -x.WordCount)
-               
-    {
-        BookParseResult.Words = data
-        TotalWordsCount = words |> Seq.length
-        SentenceData = sentencesData 
-    }
+// let parseBook (paragraphs: string list) =
+//     let sentences = paragraphs
+//                     |> List.map parseParagraph |> List.concat
+//                     
+//     let sentencesData = sentences
+//                         |> List.groupBy (fun ss -> ss.Hash)
+//                         |> List.map (fun (key, values) -> (key, values[0]))
+//                     
+//     let words = sentences
+//                 |> List.map (fun ss -> ss.WordForms |> List.map (fun w -> (w, ss.Hash))) |> List.concat
+//                 
+//     let data = words
+//                |> List.map (fun (w, ss) -> (w, stemEn w, ss))
+//                |> List.filter (fun (_, ws, _) -> not (excludeWords |> List.contains ws))
+//                |> List.filter (fun (_, ws, _) -> not (excludeNames |> List.contains ws))
+//                |> List.groupBy (fun (_, ws, _) -> ws)
+//                |> List.map (fun (key, values) -> {
+//                    BookWordsResult.WordID = key
+//                    WordCount = values |> List.length
+//                    Words = values |> List.map (fun (w, _, _) -> w) |> List.distinct
+//                    SentenceHashes = values |> List.map (fun (_, _, ss) -> ss)
+//                })
+//                |> List.sortBy (fun x -> -x.WordCount)
+//                
+//     {
+//         BookParseResult.Words = data
+//         TotalWordsCount = words |> Seq.length
+//         SentenceData = sentencesData 
+//     }
     
-let parseBookToSentenceStatisic (paragraphs: string list) =
+let parseBookToSentenceStatistic (paragraphs: string list) (stem: StemFn) =
     let result = paragraphs
-                 |> List.map parseParagraph |> List.concat
+                 |> List.map (fun p -> parseParagraph stem p) |> List.concat
     
     result
     
@@ -148,21 +156,19 @@ let getNewWords existingWords (stem: StemFn) nSentences =
     let result = nSentences
                  |> List.map (fun s -> s.WordForms)
                  |> List.concat
-                 |> List.map (fun s -> stem s)
+                 |> List.map (fun s -> s.WordID)
                  |> List.distinct
                  |> List.filter (fun w -> not (existingWords |> List.contains w))
-                 // |> List.groupBy (fun s -> s)
-                 // |> List.map (fun (key, values) -> (key, values |> List.length))
                  
     result
     
-let getNewWordForms existingWordForms (stem: StemFn) nSentences =
+let getNewWordForms existingWordForms nSentences =
     nSentences
     |> List.map (fun s -> s.WordForms)
     |> List.concat
-    |> List.distinct
-    |> List.filter (fun w -> not (existingWordForms |> List.contains w))
-    |> List.map (fun w -> (w, stem w))
+    |> List.groupBy (fun w -> w.WordID)
+    |> List.map (fun (_, values) -> values[0])
+    |> List.filter (fun w -> not (existingWordForms |> List.contains w.WordForm))
     
 let getNewSentences existingHashes nSentences =
     let result = nSentences

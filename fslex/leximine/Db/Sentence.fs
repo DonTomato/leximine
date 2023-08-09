@@ -22,3 +22,7 @@ let saveSentence sentence cn =
     |> addParameter "$sentence" sentence.Sentence
     |> addParameter "$wc" sentence.WordsCount
     |> execute
+    
+let saveBookSentence sentence bookId cn =
+    cn
+    |> command @""
