@@ -93,6 +93,19 @@ let processBook fileName dbPath (stem: StemFn) =
     
     log "New Sentences" (newSentences |> List.length)
     
+    let bookSentences = sentenceStat
+                        |> List.groupBy (fun s -> s.Hash)
+                        |> List.map (fun (key, values) -> {
+                            Db.Sentence.DbBookSentence.SentenceID = key;
+                            Db.Sentence.DbBookSentence.BookID = bookId
+                            Db.Sentence.DbBookSentence.Count = values |> List.length
+                        })
+    bookSentences
+    |> List.iter (fun s ->
+        cn
+        |> Db.Sentence.saveBookSentence s
+        |> ignore)
     
+    log "Unique Book Sentences" (bookSentences |> List.length)
     
     transaction |> db.commit

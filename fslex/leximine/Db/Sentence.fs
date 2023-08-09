@@ -8,6 +8,12 @@ type DbSentence = {
     WordsCount: int
 }
 
+type DbBookSentence = {
+    SentenceID: string
+    BookID: int64
+    Count: int
+}
+
 let readAllSentenceHashes cn =
     cn
     |> command "SELECT id FROM sentence"
@@ -23,6 +29,13 @@ let saveSentence sentence cn =
     |> addParameter "$wc" sentence.WordsCount
     |> execute
     
-let saveBookSentence sentence bookId cn =
+let saveBookSentence sentence cn =
     cn
-    |> command @""
+    |> command @"
+        INSERT INTO book_sentence (book_id, sentence_id, count)
+        VALUES ($bid, $sid, $count)"
+    |> addParameter "$bid" sentence.BookID
+    |> addParameter "$sid" sentence.SentenceID
+    |> addParameter "$count" sentence.Count
+    |> execute
+    
