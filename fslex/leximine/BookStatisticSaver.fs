@@ -108,4 +108,18 @@ let processBook fileName dbPath (stem: StemFn) =
     
     log "Unique Book Sentences" (bookSentences |> List.length)
     
+    let bookWords = sentenceStat |> SentenceParser.getBookWords
+    
+    bookWords
+    |> List.map (fun (w, c) -> {
+        Db.Word.DbBookWord.WordId = w
+        Db.Word.DbBookWord.Count = c 
+    })
+    |> List.iter (fun wb ->
+        cn
+        |> Db.Word.saveBookWord wb bookId
+        |> ignore)
+    
+    log "Word for this book" (bookWords |> List.length)
+    
     transaction |> db.commit

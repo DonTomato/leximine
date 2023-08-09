@@ -13,12 +13,12 @@ type DbWordForm = {
     Count: int
 }
 
-type DbWordBook = {
+type DbBookWord = {
     WordId: string
     Count: int
 }
 
-type DbWordFormBook = {
+type DbBookWordForm = {
     WordForm: string
     Count: int
 }
@@ -52,7 +52,7 @@ let saveWordForm (word: DbWordForm) cn =
     |> addParameter "$count" word.Count
     |> execute
     
-let saveWordBook (word: DbWordBook) (bookId: int) cn =
+let saveBookWord (word: DbBookWord) (bookId: int64) cn =
     cn
     |> command @"
         INSERT INTO book_word (book_id, word_id, count)
@@ -62,7 +62,7 @@ let saveWordBook (word: DbWordBook) (bookId: int) cn =
     |> addParameter "$count" word.Count
     |> execute
     
-let saveWordFormBook (word: DbWordFormBook) (bookId: int) cn =
+let saveBookWordForm (word: DbBookWordForm) (bookId: int) cn =
     cn
     |> command @"
         INSERT INTO book_word_form (book_id, word_form_id, count)

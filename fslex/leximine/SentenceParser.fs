@@ -171,14 +171,19 @@ let getNewWordForms existingWordForms nSentences =
     |> List.filter (fun w -> not (existingWordForms |> List.contains w.WordForm))
     
 let getNewSentences existingHashes nSentences =
-    let result = nSentences
-                 |> List.filter (fun s -> not (existingHashes |> List.contains s.Hash))
-                 |> List.groupBy (fun s -> s.Hash)
-                 |> List.map (fun (key, values) -> {
-                     Hash = key
-                     Sentence = values[0].Sentence
-                     WordCount = values[0].WordCount
-                     WordForms = values[0].WordForms
-                 })
-                 
-    result
+    nSentences
+    |> List.filter (fun s -> not (existingHashes |> List.contains s.Hash))
+    |> List.groupBy (fun s -> s.Hash)
+    |> List.map (fun (key, values) -> {
+        Hash = key
+        Sentence = values[0].Sentence
+        WordCount = values[0].WordCount
+        WordForms = values[0].WordForms
+    })
+    
+let getBookWords sentenceStat =
+    sentenceStat
+    |> List.map (fun s -> s.WordForms)
+    |> List.concat
+    |> List.groupBy (fun s -> s.WordID)
+    |> List.map (fun (id, values) -> (id, values |> List.length))
