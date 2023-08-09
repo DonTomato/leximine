@@ -62,7 +62,7 @@ let saveBookWord (word: DbBookWord) (bookId: int64) cn =
     |> addParameter "$count" word.Count
     |> execute
     
-let saveBookWordForm (word: DbBookWordForm) (bookId: int) cn =
+let saveBookWordForm (word: DbBookWordForm) (bookId: int64) cn =
     cn
     |> command @"
         INSERT INTO book_word_form (book_id, word_form_id, count)
