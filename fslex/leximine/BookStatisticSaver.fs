@@ -136,4 +136,17 @@ let processBook fileName dbPath (stem: StemFn) =
     
     log "Word Forms for this book" (bookWordForms |> List.length)
     
+    // let wordFormSentenceLinks = sentenceStat
+    //                             |> SentenceParser.getWordFormSentence
+    //                             |> List.map (fun (wf, sid) -> {
+    //                                 Db.Word.WordFormSentence.Word = wf
+    //                                 Db.Word.WordFormSentence.SentenceID = sid 
+    //                             })
+    //                             
+    // wordFormSentenceLinks
+    // |> List.iter (fun e -> cn |> Db.Word.saveWordFormSentence e |> ignore)
+    //
+    // log "Links between word forms and sentence" (wordFormSentenceLinks |> List.length)
+    
+    
     transaction |> db.commit

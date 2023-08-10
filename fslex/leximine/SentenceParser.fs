@@ -195,3 +195,10 @@ let getWordForms sentenceStat =
     |> List.groupBy (fun s -> s.WordForm)
     |> List.map (fun (id, values) -> (id, values |> List.length))
     
+let getWordFormSentence sentenceStat =
+    sentenceStat
+    |> List.map (fun s -> s.WordForms
+                          |> List.map (fun wf -> (wf.WordForm, s.Hash)))
+    |> List.concat
+    |> List.distinct
+    

@@ -71,3 +71,33 @@ let saveBookWordForm (word: DbBookWordForm) (bookId: int64) cn =
     |> addParameter "$word_form" word.WordForm
     |> addParameter "$count" word.Count
     |> execute
+
+
+type WordFormSentence = {
+    Word: string
+    SentenceID: string
+}
+
+let saveWordFormSentence w cn =
+    cn
+    |> command @"
+        INSERT INTO word_form_sentence (word_form_id, sentence_id)
+        VALUES ($w, $sid)"
+    |> addParameter "$w" w.Word
+    |> addParameter "$sid" w.SentenceID
+    |> execute
+    
+    
+type WordSentence = {
+    WordID: string
+    SentenceID: string
+}
+
+let saveWordSentence ws cn =
+    cn
+    |> command @"
+        INSERT INTO word_sentence (word_id, sentence_id)
+        VALUES ($wid, $sid)"
+    |> addParameter "$wid" ws.WordID
+    |> addParameter "$sid" ws.SentenceID
+    |> execute
