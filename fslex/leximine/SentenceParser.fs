@@ -1,5 +1,7 @@
 module leximine.SentenceParser
 
+open System
+open System.Text.RegularExpressions
 open Iveonik.Stemmers
 open leximine.Helpers
 open leximine.Book
@@ -7,11 +9,19 @@ open leximine.Book
 let private split (s: string) (str: string) =
     str.Split(s) |> Seq.toList
     
+let private splitToWords (s: string) =
+    let regex = new Regex(@"\w+")
+    regex.Matches(s)
+    |> Seq.cast<Match>
+    |> Seq.map (fun m -> m.Value)
+    |> Seq.toList
+    
 let private trim (s: string) =
     s.Trim()
     
     
-let private excludeSymboldsFromWord = [ ","; "."; ";"; "-"; "`"; "\""; "'"; "–"; "’"; "‘"; ":"; "“"; "…"; "—"; "("; ")" ]
+let private excludeSymboldsFromWord = [ ","; "."; ";"; "-"; "`"; "\""; "'"; "–"; "’"; "‘"; ":"; "“"
+                                        "…"; "—"; "("; ")"; "’"; ]
 
 // let private excludeWords = [ "the"; "an"; "this"; "it";
 //                              "her"; "him"; "his"; "he"; "she"; "they"; "you"; "them"; "we"; "me"; "those"; "us"
@@ -35,16 +45,6 @@ let private excludeSymboldsFromWord = [ ","; "."; ";"; "-"; "`"; "\""; "'"; "–
 let private excludeWords = []
 
 let private excludeNames = [ "holsten"; "lain"; "portia"; "guyen"; "bianca"; "karst" ]
-    
-let clearWord (w: string) =
-    let removeFromEnd = excludeSymboldsFromWord |> List.exists (fun s -> w.EndsWith(s))
-    let mutable word = w
-    if removeFromEnd then
-        word <- word.Substring(0, word.Length - 1)
-    let removeFromStart = excludeSymboldsFromWord |> List.exists (fun s -> word.StartsWith(s))
-    if removeFromStart then
-        word <- word.Substring(1, word.Length - 1)
-    word |> trim
     
 let private trimAndExcludeEmpty ls =
     ls |> List.map (fun s -> trim s) |> List.filter (fun s -> s.Length > 1)
@@ -87,9 +87,9 @@ let stemEn word =
     
 let parseSentence (sentence: string) =
     let words = sentence
-                |> split " "
+                |> splitToWords 
                 |> List.map (fun w -> w.ToLower())
-                |> List.map (fun w -> w |> clearWord |> clearWord) 
+                // |> List.map (fun w -> w |> clearWord |> clearWord) 
                 |> trimAndExcludeEmpty
     words
 
@@ -114,37 +114,6 @@ let parseParagraph (stem: StemFn) (p: string) =
                     |> List.concat
                     |> trimAndExcludeEmpty
     sentences |> List.map (fun s -> getSentenceStatistic stem s)
-    
-// Obsolete
-// let parseBook (paragraphs: string list) =
-//     let sentences = paragraphs
-//                     |> List.map parseParagraph |> List.concat
-//                     
-//     let sentencesData = sentences
-//                         |> List.groupBy (fun ss -> ss.Hash)
-//                         |> List.map (fun (key, values) -> (key, values[0]))
-//                     
-//     let words = sentences
-//                 |> List.map (fun ss -> ss.WordForms |> List.map (fun w -> (w, ss.Hash))) |> List.concat
-//                 
-//     let data = words
-//                |> List.map (fun (w, ss) -> (w, stemEn w, ss))
-//                |> List.filter (fun (_, ws, _) -> not (excludeWords |> List.contains ws))
-//                |> List.filter (fun (_, ws, _) -> not (excludeNames |> List.contains ws))
-//                |> List.groupBy (fun (_, ws, _) -> ws)
-//                |> List.map (fun (key, values) -> {
-//                    BookWordsResult.WordID = key
-//                    WordCount = values |> List.length
-//                    Words = values |> List.map (fun (w, _, _) -> w) |> List.distinct
-//                    SentenceHashes = values |> List.map (fun (_, _, ss) -> ss)
-//                })
-//                |> List.sortBy (fun x -> -x.WordCount)
-//                
-//     {
-//         BookParseResult.Words = data
-//         TotalWordsCount = words |> Seq.length
-//         SentenceData = sentencesData 
-//     }
     
 let parseBookToSentenceStatistic (paragraphs: string list) (stem: StemFn) =
     let result = paragraphs

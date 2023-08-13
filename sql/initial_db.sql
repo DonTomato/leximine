@@ -16,7 +16,8 @@ CREATE TABLE "sentence" (
 );
 
 CREATE TABLE "word" (
-	"word_id"	TEXT,
+	"word_id"	TEXT NOT NULL,
+	"default"	TEXT NOT NULL,
 	"total_count"	INTEGER NOT NULL DEFAULT 0,
 	PRIMARY KEY("word_id")
 );
