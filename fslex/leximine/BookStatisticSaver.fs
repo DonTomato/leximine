@@ -5,9 +5,9 @@ open leximine.Book
 
 let processBook fileName dbPath (stem: StemFn) =
     
-    let dbFileName = System.IO.Path.Combine(dbPath, "leximine_dev.db")
+    // let dbFileName = System.IO.Path.Combine(dbPath, "leximine_dev.db")
     
-    use cn = db.createCn dbFileName
+    use cn = db.createCn dbPath
     
     let transaction = cn |> db.transaction
     
@@ -136,17 +136,18 @@ let processBook fileName dbPath (stem: StemFn) =
     
     log "Word Forms for this book" (bookWordForms |> List.length)
     
-    // let wordFormSentenceLinks = sentenceStat
-    //                             |> SentenceParser.getWordFormSentence
-    //                             |> List.map (fun (wf, sid) -> {
-    //                                 Db.Word.WordFormSentence.Word = wf
-    //                                 Db.Word.WordFormSentence.SentenceID = sid 
-    //                             })
-    //                             
-    // wordFormSentenceLinks
-    // |> List.iter (fun e -> cn |> Db.Word.saveWordFormSentence e |> ignore)
-    //
-    // log "Links between word forms and sentence" (wordFormSentenceLinks |> List.length)
+    let existingWordFormSentenceLinks = Db.WordSentence.readAllExistingWordFormsSentences cn
     
+    let wordFormSentenceLinks = sentenceStat
+                                |> SentenceParser.getWordFormSentence existingWordFormSentenceLinks
+                                |> List.map (fun (wf, sid) -> {
+                                    Db.WordSentence.WordForm = wf
+                                    Db.WordSentence.SentenceID = sid 
+                                })
+                                
+    wordFormSentenceLinks
+    |> List.iter (fun e -> cn |> Db.WordSentence.saveWordFormSentence e |> ignore)
+    
+    log "Links between word forms and sentence" (wordFormSentenceLinks |> List.length)
     
     transaction |> db.commit
