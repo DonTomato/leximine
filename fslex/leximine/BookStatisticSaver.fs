@@ -45,7 +45,7 @@ let processBook fileName dbPath (stem: StemFn) =
     
     let existingWords = cn |> Db.Word.readAllWordId
     
-    let newWords = sentenceStat |> SentenceParser.getNewWords existingWords stem
+    let newWords = sentenceStat |> SentenceParser.getNewWords existingWords
     
     newWords
     |> List.iter (fun w ->
