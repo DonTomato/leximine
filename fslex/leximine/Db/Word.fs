@@ -4,6 +4,7 @@ open leximine.db
 
 type DbWord = {
     WordId: string
+    Default: string
     TotalCount: int
 }
 
@@ -36,9 +37,10 @@ let readAllWordForms cn =
 let saveWord (word: DbWord) cn =
     cn
     |> command @$"
-        INSERT INTO word (word_id, total_count)
-        VALUES ($word, $count)"
+        INSERT INTO word (word_id, default_form, total_count)
+        VALUES ($word, $def, $count)"
     |> addParameter "$word" word.WordId
+    |> addParameter "$def" word.Default
     |> addParameter "$count" word.TotalCount
     |> execute
     

@@ -48,10 +48,11 @@ let processBook fileName dbPath (stem: StemFn) =
     let newWords = sentenceStat |> SentenceParser.getNewWords existingWords
     
     newWords
-    |> List.iter (fun w ->
+    |> List.iter (fun (w, d) ->
         cn
         |> Db.Word.saveWord {
             WordId = w
+            Default = d
             TotalCount = 0
         }
         |> ignore)

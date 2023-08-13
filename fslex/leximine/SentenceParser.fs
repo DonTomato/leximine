@@ -122,12 +122,26 @@ let parseBookToSentenceStatistic (paragraphs: string list) (stem: StemFn) =
     result
     
 let getNewWords existingWords nSentences =
+    
+    let getDefault wid words =
+        if words |> List.contains wid then
+            wid
+        else
+            words
+            |> List.sortBy (fun s -> String.length(s))
+            |> List.head
+        
+    
     let result = nSentences
                  |> List.map (fun s -> s.WordForms)
                  |> List.concat
-                 |> List.map (fun s -> s.WordID)
+                 |> List.groupBy (fun s -> s.WordID)
+                 |> List.map (fun (w, values) -> (w, values
+                                                     |> List.map (fun v -> v.WordForm)
+                                                     |> List.distinct
+                                                     |> getDefault w))
                  |> List.distinct
-                 |> List.filter (fun w -> not (existingWords |> List.contains w))
+                 |> List.filter (fun (w, _) -> not (existingWords |> List.contains w))
                  
     result
     
