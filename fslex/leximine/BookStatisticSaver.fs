@@ -136,7 +136,7 @@ let processBook fileName dbPath (stem: StemFn) =
     
     log "Word Forms for this book" (bookWordForms |> List.length)
     
-    let existingWordFormSentenceLinks = Db.WordSentence.readAllExistingWordFormsSentences cn
+    let existingWordFormSentenceLinks = Db.WordSentence.readAllExistingWordFormSentenceLinks cn
     
     let wordFormSentenceLinks = sentenceStat
                                 |> SentenceParser.getWordFormSentence existingWordFormSentenceLinks
@@ -149,5 +149,18 @@ let processBook fileName dbPath (stem: StemFn) =
     |> List.iter (fun e -> cn |> Db.WordSentence.saveWordFormSentence e |> ignore)
     
     log "Links between word forms and sentence" (wordFormSentenceLinks |> List.length)
+    
+    let existingWordSentenceLinks = Db.WordSentence.readAllExistingWordSentenceLinks cn
+    
+    let wordSentenceLinks = sentenceStat
+                            |> SentenceParser.getWordSentence existingWordSentenceLinks
+                            |> List.map (fun (w, sid) -> {
+                                Db.WordSentence.WordSentence.WordID = w
+                                Db.WordSentence.WordSentence.SentenceID = sid 
+                            })
+                            
+    wordSentenceLinks |> List.iter (fun e -> cn |> Db.WordSentence.saveWordSentence e |> ignore)
+    
+    log "Links between word and sentence" (wordSentenceLinks |> List.length)
     
     transaction |> db.commit

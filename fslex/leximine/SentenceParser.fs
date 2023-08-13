@@ -203,3 +203,10 @@ let getWordFormSentence existing sentenceStat =
     |> List.distinct
     |> List.except existing
     
+let getWordSentence existing sentenceStat =
+    sentenceStat
+    |> List.map (fun s -> s.WordForms
+                          |> List.map (fun e -> (e.WordID, s.Hash)))
+    |> List.concat
+    |> List.distinct
+    |> List.except existing

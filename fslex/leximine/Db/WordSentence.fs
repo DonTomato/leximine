@@ -7,10 +7,15 @@ type WordFormSentence = {
     SentenceID: string
 }
 
-let readAllExistingWordFormsSentences cn =
+let readAllExistingWordFormSentenceLinks cn =
     cn
     |> command "SELECT word_form_id, sentence_id FROM word_form_sentence"
     |> query (fun read -> (read.string "word_form_id", read.string "sentence_id"))
+    
+let readAllExistingWordSentenceLinks cn =
+    cn
+    |> command "SELECT word_id, sentence_id FROM word_sentence"
+    |> query (fun read -> (read.string "word_id", read.string "sentence_id"))
 
 let saveWordFormSentence w cn =
     cn
