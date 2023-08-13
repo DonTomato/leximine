@@ -1444,6 +1444,28 @@
           }
         }
       },
+      "System.Text.Encoding.CodePages/8.0.0-preview.7.23375.6": {
+        "type": "package",
+        "compile": {
+          "lib/net7.0/System.Text.Encoding.CodePages.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net7.0/System.Text.Encoding.CodePages.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net6.0/_._": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net7.0/System.Text.Encoding.CodePages.dll": {
+            "assetType": "runtime",
+            "rid": "win"
+          }
+        }
+      },
       "System.Text.Encoding.Extensions/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -4588,6 +4610,47 @@
         "system.text.encoding.nuspec"
       ]
     },
+    "System.Text.Encoding.CodePages/8.0.0-preview.7.23375.6": {
+      "sha512": "ZGD8J3V2GV8d5AGQoPzmQ+npWDgsXPoRZRKg5BY50bQziyG1ke4ycfck5xGUJJuPsT/ihSZUuXXa2xj/HWNgJw==",
+      "type": "package",
+      "path": "system.text.encoding.codepages/8.0.0-preview.7.23375.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net461/System.Text.Encoding.CodePages.targets",
+        "buildTransitive/net462/_._",
+        "buildTransitive/net6.0/_._",
+        "buildTransitive/netcoreapp2.0/System.Text.Encoding.CodePages.targets",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net462/System.Text.Encoding.CodePages.dll",
+        "lib/net462/System.Text.Encoding.CodePages.xml",
+        "lib/net6.0/System.Text.Encoding.CodePages.dll",
+        "lib/net6.0/System.Text.Encoding.CodePages.xml",
+        "lib/net7.0/System.Text.Encoding.CodePages.dll",
+        "lib/net7.0/System.Text.Encoding.CodePages.xml",
+        "lib/net8.0/System.Text.Encoding.CodePages.dll",
+        "lib/net8.0/System.Text.Encoding.CodePages.xml",
+        "lib/netstandard2.0/System.Text.Encoding.CodePages.dll",
+        "lib/netstandard2.0/System.Text.Encoding.CodePages.xml",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "runtimes/win/lib/net6.0/System.Text.Encoding.CodePages.dll",
+        "runtimes/win/lib/net6.0/System.Text.Encoding.CodePages.xml",
+        "runtimes/win/lib/net7.0/System.Text.Encoding.CodePages.dll",
+        "runtimes/win/lib/net7.0/System.Text.Encoding.CodePages.xml",
+        "runtimes/win/lib/net8.0/System.Text.Encoding.CodePages.dll",
+        "runtimes/win/lib/net8.0/System.Text.Encoding.CodePages.xml",
+        "system.text.encoding.codepages.8.0.0-preview.7.23375.6.nupkg.sha512",
+        "system.text.encoding.codepages.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
     "System.Text.Encoding.Extensions/4.3.0": {
       "sha512": "YVMK0Bt/A43RmwizJoZ22ei2nmrhobgeiYwFzC4YAN+nue8RF6djXDMog0UCn+brerQoYVyaS+ghy9P/MUVcmw==",
       "type": "package",
@@ -5099,7 +5162,8 @@
       "FSharp.Core >= 7.0.300",
       "Microsoft.Data.Sqlite >= 8.0.0-preview.6.23329.4",
       "StemmersNet.Standard >= 1.1.1",
-      "System.Data.HashFunction.Jenkins >= 2.0.0"
+      "System.Data.HashFunction.Jenkins >= 2.0.0",
+      "System.Text.Encoding.CodePages >= 8.0.0-preview.7.23375.6"
     ]
   },
   "packageFolders": {
@@ -5154,6 +5218,11 @@
           "System.Data.HashFunction.Jenkins": {
             "target": "Package",
             "version": "[2.0.0, )",
+            "generatePathProperty": true
+          },
+          "System.Text.Encoding.CodePages": {
+            "target": "Package",
+            "version": "[8.0.0-preview.7.23375.6, )",
             "generatePathProperty": true
           }
         },

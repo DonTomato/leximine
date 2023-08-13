@@ -4,9 +4,6 @@ open leximine.Helpers
 open leximine.Book
 
 let processBook fileName dbPath (stem: StemFn) =
-    
-    // let dbFileName = System.IO.Path.Combine(dbPath, "leximine_dev.db")
-    
     use cn = db.createCn dbPath
     
     let transaction = cn |> db.transaction
@@ -162,5 +159,18 @@ let processBook fileName dbPath (stem: StemFn) =
     wordSentenceLinks |> List.iter (fun e -> cn |> Db.WordSentence.saveWordSentence e |> ignore)
     
     log "Links between word and sentence" (wordSentenceLinks |> List.length)
+    
+    printfn ""
+    printfn "Update statistics"
+    
+    cn
+    |> db.command @"
+        UPDATE word
+        SET total_count = (
+            SELECT SUM(book_word.count)
+            FROM book_word
+            WHERE book_word.word_id = word.word_id
+        )"
+    |> db.execute |> ignore
     
     transaction |> db.commit

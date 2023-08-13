@@ -1,10 +1,14 @@
 module leximine.Fb2Parser
 
+open System.IO
+open System.Text
 open System.Xml.Linq
 
 let load (fn: string) =
-    let dataFromFile = XDocument.Load fn;
-    dataFromFile
+    // let text = File.ReadAllText(fn, Encoding.GetEncoding("windows-1251"));
+    // XDocument.Parse(text);
+    
+    XDocument.Load fn;
 
 let parseData (data: XDocument) =
     let ns = data.Root.GetDefaultNamespace()

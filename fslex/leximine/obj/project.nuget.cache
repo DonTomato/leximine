@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "8f757jkhm8xHCZ9swr+IV8JNwwu5DTEyy5vGdIErUJXrI/qEiCGejLXzZK30skbXi94+4fXFpFz5dhikCVhZDg==",
+  "dgSpecHash": "Q/59UPfo80L1avizA/eqxzA78cJ5jd8FzkjMxcJmIm0HTxdgH3Yi7P8ppUgpc3cOCOnpbfxo40Og1VpbL1yvrA==",
   "success": true,
   "projectFilePath": "C:\\code\\leximine\\fslex\\leximine\\leximine.fsproj",
   "expectedPackageFiles": [
@@ -81,6 +81,7 @@
     "C:\\Users\\micha\\.nuget\\packages\\system.security.cryptography.primitives\\4.3.0\\system.security.cryptography.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\micha\\.nuget\\packages\\system.security.cryptography.x509certificates\\4.3.0\\system.security.cryptography.x509certificates.4.3.0.nupkg.sha512",
     "C:\\Users\\micha\\.nuget\\packages\\system.text.encoding\\4.3.0\\system.text.encoding.4.3.0.nupkg.sha512",
+    "C:\\Users\\micha\\.nuget\\packages\\system.text.encoding.codepages\\8.0.0-preview.7.23375.6\\system.text.encoding.codepages.8.0.0-preview.7.23375.6.nupkg.sha512",
     "C:\\Users\\micha\\.nuget\\packages\\system.text.encoding.extensions\\4.3.0\\system.text.encoding.extensions.4.3.0.nupkg.sha512",
     "C:\\Users\\micha\\.nuget\\packages\\system.text.regularexpressions\\4.3.0\\system.text.regularexpressions.4.3.0.nupkg.sha512",
     "C:\\Users\\micha\\.nuget\\packages\\system.threading\\4.3.0\\system.threading.4.3.0.nupkg.sha512",
