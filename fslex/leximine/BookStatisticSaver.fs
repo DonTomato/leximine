@@ -174,4 +174,14 @@ let processBook fileName dbPath (stem: StemFn) =
         )"
     |> db.execute |> ignore
     
+    cn
+    |> db.command @"
+        UPDATE word_form
+        SET count = (
+	        SELECT SUM(book_word_form.count)
+	        FROM book_word_form
+	        WHERE book_word_form.word_form_id = word_form.id
+        )"
+    |> db.execute |> ignore
+    
     transaction |> db.commit

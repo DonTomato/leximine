@@ -1,23 +1,8 @@
 module leximine.SentenceParser
 
-open System
-open System.Text.RegularExpressions
 open Iveonik.Stemmers
 open leximine.Helpers
 open leximine.Book
-
-let private split (s: string) (str: string) =
-    str.Split(s) |> Seq.toList
-    
-let private splitToWords (s: string) =
-    let regex = new Regex(@"\w+")
-    regex.Matches(s)
-    |> Seq.cast<Match>
-    |> Seq.map (fun m -> m.Value)
-    |> Seq.toList
-    
-let private trim (s: string) =
-    s.Trim()
     
     
 let private excludeSymboldsFromWord = [ ","; "."; ";"; "-"; "`"; "\""; "'"; "–"; "’"; "‘"; ":"; "“"
@@ -42,9 +27,9 @@ let private excludeSymboldsFromWord = [ ","; "."; ";"; "-"; "`"; "\""; "'"; "–
 //                              
 //                              "what"; "when"; "who"; "how"; "whi" ]
 
-let private excludeWords = []
+let private excludeWords = [ "don" ]
 
-let private excludeNames = [ "holsten"; "lain"; "portia"; "guyen"; "bianca"; "karst" ]
+let private excludeNames = [ "Holsten"; "Lain"; "Portia"; "Guyen"; "Bianca"; "Karst"; "Vitas"; "Scoles"; "Avrana"; "Viola"; "Alpash"; "Nessel" ]
     
 let private trimAndExcludeEmpty ls =
     ls |> List.map (fun s -> trim s) |> List.filter (fun s -> s.Length > 1)
@@ -87,9 +72,9 @@ let stemEn word =
     
 let parseSentence (sentence: string) =
     let words = sentence
-                |> splitToWords 
-                |> List.map (fun w -> w.ToLower())
-                // |> List.map (fun w -> w |> clearWord |> clearWord) 
+                |> splitToWords
+                |> List.except excludeNames
+                |> List.map (fun w -> toLower w)
                 |> trimAndExcludeEmpty
     words
 

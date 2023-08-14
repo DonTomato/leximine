@@ -7,8 +7,8 @@ printfn "Leximine Parser"
 
 Encoding.RegisterProvider(CodePagesEncodingProvider.Instance)
 
-// let book = @"d:\temp\book\children_of_time.fb2"
-let book = @"d:\temp\book\1.fb2";
+let book = @"d:\temp\book\children_of_time.fb2"
+// let book = @"d:\temp\book\1.fb2";
 // let book = @"d:\temp\book\2.fb2";
 // let book = @"d:\temp\book\3.fb2";
 // let book = @"d:\temp\book\4.fb2";
