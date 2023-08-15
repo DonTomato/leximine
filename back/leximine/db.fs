@@ -15,7 +15,7 @@ let command sql (cn: SqliteConnection) =
     command
     
 let addParameter param value (command: SqliteCommand) =
-    command.Parameters.AddWithValue(param, value)
+    command.Parameters.AddWithValue(param, value) |> ignore
     command
     
 type SqliteReaderHelper = {
@@ -27,10 +27,6 @@ type SqliteReaderHelper = {
 let query f (command: SqliteCommand) =
     use reader = command.ExecuteReader()
     let tableSchema = reader.GetSchemaTable()
-    // let columns = tableSchema.Columns
-    //               |> Seq.cast<DataColumn>
-    //               |> Seq.map (fun c -> c.ColumnName)
-    //               |> Seq.toList
                   
     let columns = tableSchema.Rows
                   |> Seq.cast<DataRow>

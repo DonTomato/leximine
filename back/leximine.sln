@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "leximine", "leximine\leximine.fsproj", "{0A6E32BE-A0BF-4CFC-8349-6175DC9D61FE}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "leximine.Logic", "leximine.Logic\leximine.Logic.fsproj", "{FB2D2319-8C42-4E7D-803B-3F4E591115A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{0A6E32BE-A0BF-4CFC-8349-6175DC9D61FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A6E32BE-A0BF-4CFC-8349-6175DC9D61FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A6E32BE-A0BF-4CFC-8349-6175DC9D61FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB2D2319-8C42-4E7D-803B-3F4E591115A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB2D2319-8C42-4E7D-803B-3F4E591115A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB2D2319-8C42-4E7D-803B-3F4E591115A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB2D2319-8C42-4E7D-803B-3F4E591115A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
