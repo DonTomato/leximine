@@ -9,13 +9,18 @@ open Giraffe
 
 printfn "Leximine Service"
 
+open leximine.Service
+
 let webApp =
     choose [
         route "/ping"   >=> text "pong"
-        route "/req"    >=> json { leximine.Service.result = 10
-                                   leximine.Service.success = true }
+        route "/req"    >=> json { Response.result = 10
+                                   Response.success = true }
         GET >=> route "/jopa/%i" >=> warbler (fun _ -> text "asd")
-        route "/"       >=> htmlFile "/pages/index.html" ]
+        PUT >=> route "/data"    >=> MyHandler.myHandler
+        
+        route "/"       >=> htmlFile "/pages/index.html"
+    ]
 
 let configureApp (app : IApplicationBuilder) =
     // Add Giraffe to the ASP.NET Core pipeline

@@ -1,4 +1,4 @@
-module leximine.Service
+module leximine.Service.Response
 
 type MyResponse = {
     result: int
