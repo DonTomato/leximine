@@ -1,0 +1,23 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 10px;
+}
+  
+body { 
+    font-family: 'Barlow', sans-serif;;
+    background-color: #ebebeb;
+    color: #051820;
+    box-sizing: border-box;
+    font-size: 1.6rem;
+}
+
+input, textarea, button {
+    font-family: inherit;
+}
+
+$main-color: #609aaa;
