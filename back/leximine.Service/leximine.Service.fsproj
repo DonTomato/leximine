@@ -6,6 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Compile Include="DatabaseHandleer.fs" />
         <Compile Include="SomeService.fs" />
         <Compile Include="MyHandler.fs" />
         <Compile Include="Program.fs" />
@@ -13,6 +14,10 @@
 
     <ItemGroup>
       <PackageReference Include="Giraffe" Version="6.2.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\leximine.Logic\leximine.Logic.fsproj" />
     </ItemGroup>
 
 </Project>

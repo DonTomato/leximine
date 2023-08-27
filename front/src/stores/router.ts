@@ -10,4 +10,4 @@ export enum RouterKey {
     Words = 'words',
 }
 
-export const router = writable<RouterData>({ key: RouterKey.Home });
+export const router = writable<RouterData>({ key: RouterKey.Databases });

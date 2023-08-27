@@ -14,21 +14,28 @@ open leximine.Service
 let webApp =
     choose [
         route "/ping"   >=> text "pong"
-        route "/req"    >=> json { Response.result = 10
-                                   Response.success = true }
-        GET >=> route "/jopa/%i" >=> warbler (fun _ -> text "asd")
-        PUT >=> route "/data"    >=> MyHandler.myHandler
+        GET >=> route "/langs"    >=> DatabaseHandler.dataListHandler
+        // route "/req"    >=> json { Response.result = 10
+        //                            Response.success = true }
+        // GET >=> route "/jopa/%i" >=> warbler (fun _ -> text "asd")
+        // PUT >=> route "/data"    >=> MyHandler.myHandler
         
         route "/"       >=> htmlFile "/pages/index.html"
     ]
 
 let configureApp (app : IApplicationBuilder) =
-    // Add Giraffe to the ASP.NET Core pipeline
+    app.UseCors("AllowAll") |> ignore
     app.UseGiraffe webApp
 
 let configureServices (services : IServiceCollection) =
     // Add Giraffe dependencies
-    services.AddGiraffe() |> ignore
+    services.AddGiraffe().AddCors(
+        fun corsPolicyBuilder ->
+            corsPolicyBuilder.AddPolicy("AllowAll", fun policyBuilder ->
+                policyBuilder.AllowAnyOrigin()
+                             .AllowAnyMethod()
+                             .AllowAnyHeader() |> ignore))
+    |> ignore
 
 [<EntryPoint>]
 let main _ =

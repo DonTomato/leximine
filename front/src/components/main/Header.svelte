@@ -1,5 +1,6 @@
 <script lang="ts">
     import { RouterKey, router } from '../../stores/router';
+    import { store } from '../../stores/store';
 
     function go(key: RouterKey) {
         router.update(s => ({ ...s, key }));
@@ -7,25 +8,41 @@
 </script>
 
 <header class="container header">
-    <a class="logo" href="/">
-        <img src="/logo.png" alt="">
-        <h1>Leximine</h1>
-    </a>
+    <div class="left">
+        <a class="logo" href="/">
+            <img src="/logo.png" alt="">
+            <h1>Leximine</h1>
+        </a>
+    
+        <div class="menu">
+            <button class="item" class:active={$router.key === RouterKey.Home} on:click={() => go(RouterKey.Home)}>Home</button>
+            <button class="item" class:active={$router.key === RouterKey.Words} on:click={() => go(RouterKey.Words)}>Words</button>
+            <button class="item" class:active={$router.key === RouterKey.Databases} on:click={() => go(RouterKey.Databases)}>Databases</button>
+        </div>
+    </div>
 
-    <div class="menu">
-        <button class="item" class:active={$router.key === RouterKey.Home} on:click={() => go(RouterKey.Home)}>Home</button>
-        <button class="item" class:active={$router.key === RouterKey.Words} on:click={() => go(RouterKey.Words)}>Words</button>
-        <button class="item" class:active={$router.key === RouterKey.Databases} on:click={() => go(RouterKey.Databases)}>Databases</button>
+    <div class="right">
+        <select bind:value={$store.lang} class="lm-select">
+            {#each $store.langs as lang}
+                <option value={lang}>{lang}</option>
+            {/each}
+        </select>
     </div>
 </header>
 
 <style lang="scss">
     .header {
         display: flex;
+        justify-content: space-between;
         align-items: center;
         padding: 1rem 0;
         background-color: #fff;
         height: 6rem;
+    }
+
+    .left, .right {
+        display: flex;
+        align-items: center;
     }
 
     .logo {
