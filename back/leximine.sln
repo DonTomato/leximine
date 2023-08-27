@@ -6,6 +6,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "leximine.Logic", "leximine.
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "leximine.Service", "leximine.Service\leximine.Service.fsproj", "{D39F565A-CEF5-4E0E-B6F0-28269542C022}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "leximine.SqliteDb", "leximine.SqliteDb\leximine.SqliteDb.fsproj", "{C97E3008-D360-45A4-900F-7596D311C291}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{D39F565A-CEF5-4E0E-B6F0-28269542C022}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D39F565A-CEF5-4E0E-B6F0-28269542C022}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D39F565A-CEF5-4E0E-B6F0-28269542C022}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C97E3008-D360-45A4-900F-7596D311C291}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C97E3008-D360-45A4-900F-7596D311C291}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C97E3008-D360-45A4-900F-7596D311C291}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C97E3008-D360-45A4-900F-7596D311C291}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
