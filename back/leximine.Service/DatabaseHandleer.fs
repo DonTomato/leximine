@@ -9,3 +9,9 @@ let dataListHandler =
             let languages = leximine.Logic.DbFileHelper.getLanguages ()
             return! json languages next ctx
         }
+
+let getDbListHandler ln = fun (next: HttpFunc) (ctx: HttpContext) ->
+    task {
+        let languages = leximine.Logic.DbFileHelper.getDbList ln
+        return! json languages next ctx
+    }
