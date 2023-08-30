@@ -39,3 +39,9 @@ let makeBackup ln =
     let newFileName = sprintf "leximine_%s.db" (DateTime.Now.ToString("yyyyMMddHHmmss"))
     File.Copy(currentDbf, newFileName, true)
     newFileName
+
+let restoreBackup ln fileName =
+    let fullFilename = Path.Combine(root, ln, fileName)
+    let currentDbf = getCurrentDbFileName ln
+    File.Copy(fullFilename, currentDbf, true)
+    File.Delete(fileName)

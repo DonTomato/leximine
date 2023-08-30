@@ -14,9 +14,11 @@ open leximine.Service
 
 let webApp =
     choose [
-        route "/ping"   >=> text "pong"
-        GET >=> route "/langs"    >=> DatabaseHandler.dataListHandler
-        GET >=> routef "/%s/dblist" (fun ln -> DatabaseHandler.getDbListHandler ln)
+        GET     >=> route "/ping"       >=> text "pong"
+        GET     >=> route "/langs"      >=> DatabaseHandler.dataListHandler
+        GET     >=> routef "/%s/dblist" DatabaseHandler.getDbListHandler
+        POST    >=> routef "/%s/makebackup" DatabaseHandler.makeBackupHandler
+        POST    >=> routef "/%s/restorebackup/%s" DatabaseHandler.restoreBackupHandler
         // route "/req"    >=> json { Response.result = 10
         //                            Response.success = true }
         // GET >=> route "/jopa/%i" >=> warbler (fun _ -> text "asd")
