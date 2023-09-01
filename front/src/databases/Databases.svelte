@@ -1,7 +1,8 @@
 <script lang="ts">
-    import { get } from "../lib/api";
+    import { get, post } from "../lib/api";
     import { store } from "../stores/store";
     import CurrentDatabase from "./CurrentDatabase.svelte";
+    import DatabaseList from "./DatabaseList.svelte";
     import type { DatabaseListResponse, DbInfo } from "./models";
 
     let prevLang: string;
@@ -20,6 +21,11 @@
         mainDb = response.mainDb;
         backups = response.backups;
     }
+
+    async function createBackup() {
+        await post(`${$store.lang}/createbackup`, null);
+        await requestData();
+    }
 </script>
 
 <h1 class="page-header">Databases</h1>
@@ -28,7 +34,12 @@
     <p>Here you can manage your databases.</p>
 
     {#if mainDb}
-        <CurrentDatabase fileName={mainDb.fileName} size={mainDb.size} />
+        <CurrentDatabase fileName={mainDb.fileName} size={mainDb.size} 
+            on:backup={createBackup} />
+    {/if}
+
+    {#if backups && backups.length}
+        <DatabaseList databases={backups} />
     {/if}
 </div>
 

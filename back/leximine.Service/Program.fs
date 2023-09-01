@@ -17,7 +17,7 @@ let webApp =
         GET     >=> route "/ping"       >=> text "pong"
         GET     >=> route "/langs"      >=> DatabaseHandlers.dataListHandler
         GET     >=> routef "/%s/dblist" DatabaseHandlers.getDbListHandler
-        POST    >=> routef "/%s/makebackup" DatabaseHandlers.makeBackupHandler
+        POST    >=> routef "/%s/createbackup" DatabaseHandlers.makeBackupHandler
         POST    >=> routef "/%s/restorebackup/%s" DatabaseHandlers.restoreBackupHandler
         // route "/req"    >=> json { Response.result = 10
         //                            Response.success = true }

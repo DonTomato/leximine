@@ -6,7 +6,7 @@
 
     export let fileName: string;
     export let size: number;
-    export let disabled: boolean = true;
+    export let disabled: boolean = false;
 </script>
 
 <div class="file">

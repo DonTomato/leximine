@@ -5,3 +5,15 @@ export function get<T>(api: string) {
         .then(response => response.json() as Promise<T>)
         .then(data => data as T);
 }
+
+export function post<T>(api: string, body: any) {
+    return fetch(apiUrl + api, {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => response.json() as Promise<T>)
+        .then(data => data as T);
+}
