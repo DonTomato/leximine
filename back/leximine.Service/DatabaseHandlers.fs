@@ -1,4 +1,4 @@
-module leximine.Service.DatabaseHandler
+module leximine.Service.DatabaseHandlers
 
 open Microsoft.AspNetCore.Http
 open Giraffe

@@ -6,7 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="DatabaseHandleer.fs" />
+        <Compile Include="DatabaseHandlers.fs" />
         <Compile Include="SomeService.fs" />
         <Compile Include="MyHandler.fs" />
         <Compile Include="Program.fs" />
