@@ -1,0 +1,32 @@
+.lx-btn {
+    background-color: #ffffff;
+    color: #333;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 0;
+    padding: 0.4rem 2rem;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+
+    @include input-border();
+
+    &:hover {
+        background-color: #e6e6e6;
+        color: #333;
+    }
+
+    &:active {
+        background-color: #d4d4d4;
+        color: #131313;
+    }
+
+    &:disabled {
+        background-color: #e6e6e6;
+        // border-color: #adadad;
+        color: #333;
+        cursor: default;
+    }
+}

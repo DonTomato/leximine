@@ -31,6 +31,8 @@
 </header>
 
 <style lang="scss">
+    @use "src/styles/mixins";
+
     .header {
         display: flex;
         justify-content: space-between;
@@ -48,6 +50,7 @@
     .logo {
         display: flex;
         text-decoration: none;
+        border-radius: 4px;
 
         img {
             width: 36px;
@@ -60,6 +63,10 @@
             font-weight: 600;
             font-size: 2.5rem;
             color: #3b0947;
+        }
+
+        &:focus {
+            @include mixins.outline();
         }
     }
 
@@ -90,6 +97,10 @@
 
             &.active {
                 font-weight: 600;
+            }
+
+            &:focus {
+                @include mixins.outline();
             }
         }
     }

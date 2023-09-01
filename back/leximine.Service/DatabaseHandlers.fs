@@ -13,8 +13,13 @@ let dataListHandler =
 let getDbListHandler ln =
     fun (next: HttpFunc) (ctx: HttpContext) ->
         task {
-            let languages = leximine.Logic.DbFileHelper.getDbList ln
-            return! json languages next ctx
+            let dbs = leximine.Logic.DbFileHelper.getDbList ln
+            let mainDb = dbs |> List.find (fun x -> x.FileName = "leximine.db")
+            let response = {|
+                MainDb = mainDb
+                Backups = dbs |> List.filter (fun x -> x <> mainDb)
+            |}
+            return! json response next ctx
         }
 
 let makeBackupHandler ln =

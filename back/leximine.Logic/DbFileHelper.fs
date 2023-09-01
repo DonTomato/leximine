@@ -29,9 +29,9 @@ let getDbList ln =
     initDb ln
 
     Directory.GetFiles(Path.Combine(root, ln))
-    |> Array.map (fun x ->
+    |> Array.toList |> List.map (fun x ->
         let fi = new FileInfo(x)
-        { Language = ln; FileName = x; Size = fi.Length }
+        { DbInfo.Language = ln; FileName = fi.Name; Size = fi.Length }
     )
 
 let makeBackup ln =

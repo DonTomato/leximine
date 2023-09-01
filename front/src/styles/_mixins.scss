@@ -1,0 +1,19 @@
+@mixin outline() {
+    outline-offset: 2px;
+    outline: 2px solid #27709e;
+}
+
+@mixin input-border() {
+    border: 2px solid #b4c2cb;
+    border-radius: 4px;
+
+    &:hover {
+        border-color: #9fb1bc;
+    }
+
+    &:focus {
+        @include outline();
+    }
+}
+
+$border-radius: 4px;

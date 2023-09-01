@@ -1,10 +1,39 @@
 <script lang="ts">
+    import { get } from "../lib/api";
+    import { store } from "../stores/store";
+    import CurrentDatabase from "./CurrentDatabase.svelte";
+    import type { DatabaseListResponse, DbInfo } from "./models";
 
+    let prevLang: string;
+    $: {
+        if (prevLang !== $store.lang && $store.lang) {
+            requestData();
+        }
+        prevLang = $store.lang;
+    }
+
+    let mainDb: DbInfo;
+    let backups: DbInfo[];
+
+    async function requestData() {
+        const response = await get<DatabaseListResponse>(`${$store.lang}/dblist`);
+        mainDb = response.mainDb;
+        backups = response.backups;
+    }
 </script>
 
 <h1 class="page-header">Databases</h1>
-<p>Manage dbs</p>
+
+<div class="content">
+    <p>Here you can manage your databases.</p>
+
+    {#if mainDb}
+        <CurrentDatabase fileName={mainDb.fileName} size={mainDb.size} />
+    {/if}
+</div>
 
 <style lang="scss">
-    
+    .content {
+        margin-top: 2rem;
+    }
 </style>

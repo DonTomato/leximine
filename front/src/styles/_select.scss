@@ -1,6 +1,7 @@
 .lm-select {
-    border: 2px solid #b4c2cb;
-    border-radius: 4px;
+    // border: 2px solid #b4c2cb;
+    // border-radius: 4px;
+    @include input-border();
     padding: 0.5rem;
     font-size: 1.6rem;
 }
