@@ -1,6 +1,9 @@
 <script lang="ts">
+    import { createEventDispatcher } from "svelte";
     import DatabaseItem from "./DatabaseItem.svelte";
-import type { DbInfo } from "./models";
+    import type { DbInfo } from "./models";
+
+    const dispatch = createEventDispatcher();
 
     export let databases: DbInfo[];
 </script>
@@ -13,7 +16,9 @@ import type { DbInfo } from "./models";
     <div class="list">
         {#each databases as db}
             <div>
-                <DatabaseItem {db} />
+                <DatabaseItem {db} 
+                    on:restore={() => dispatch('restore', db)}
+                    on:delete={() => dispatch('delete', db)}/>
             </div>
         {/each}
     </div>

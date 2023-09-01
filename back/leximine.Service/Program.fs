@@ -19,6 +19,7 @@ let webApp =
         GET     >=> routef "/%s/dblist" DatabaseHandlers.getDbListHandler
         POST    >=> routef "/%s/createbackup" DatabaseHandlers.makeBackupHandler
         POST    >=> routef "/%s/restorebackup/%s" DatabaseHandlers.restoreBackupHandler
+        DELETE  >=> routef "/%s/deletebackup/%s" DatabaseHandlers.deleteBackupHandler
         // route "/req"    >=> json { Response.result = 10
         //                            Response.success = true }
         // GET >=> route "/jopa/%i" >=> warbler (fun _ -> text "asd")

@@ -46,3 +46,7 @@ let restoreBackup ln fileName =
     let currentDbf = getCurrentDbFileName ln
     File.Copy(fullFilename, currentDbf, true)
     File.Delete(fileName)
+
+let deleteBackup ln fileName =
+    let fullFilename = Path.Combine(root, ln, fileName)
+    File.Delete(fullFilename)

@@ -1,6 +1,9 @@
 <script lang="ts">
+    import { createEventDispatcher } from "svelte";
     import Size from "../lib/Size.svelte";
     import type { DbInfo } from "./models";
+
+    const dispatch = createEventDispatcher();
 
     export let db: DbInfo;
 </script>
@@ -11,8 +14,8 @@
         <Size size={db.size} />
     </div>
     <div class="actions">
-        <button class="lx-btn">Restore</button>
-        <button class="lx-btn">Delete</button>
+        <button class="lx-btn" on:click={() => dispatch('restore')}>Restore</button>
+        <button class="lx-btn" on:click={() => dispatch('delete')}>Delete</button>
     </div>
 </div>
 

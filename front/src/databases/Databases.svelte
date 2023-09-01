@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { get, post } from "../lib/api";
+    import { del, get, post } from "../lib/api";
     import { store } from "../stores/store";
     import CurrentDatabase from "./CurrentDatabase.svelte";
     import DatabaseList from "./DatabaseList.svelte";
@@ -26,6 +26,11 @@
         await post(`${$store.lang}/createbackup`, null);
         await requestData();
     }
+
+    async function deleteBackup(event: CustomEvent<DbInfo>) {
+        await del(`${$store.lang}/deletebackup/${event.detail.fileName}`);
+        await requestData();
+    }
 </script>
 
 <h1 class="page-header">Databases</h1>
@@ -39,7 +44,7 @@
     {/if}
 
     {#if backups && backups.length}
-        <DatabaseList databases={backups} />
+        <DatabaseList databases={backups} on:delete={deleteBackup} />
     {/if}
 </div>
 

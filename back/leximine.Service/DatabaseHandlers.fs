@@ -35,3 +35,10 @@ let restoreBackupHandler (ln, fileName) =
             leximine.Logic.DbFileHelper.restoreBackup ln fileName
             return! Successful.OK "" next ctx
         }
+
+let deleteBackupHandler (ln, fileName) =
+    fun (next: HttpFunc) (ctx: HttpContext) ->
+        task {
+            leximine.Logic.DbFileHelper.deleteBackup ln fileName
+            return! Successful.OK "" next ctx
+        }
