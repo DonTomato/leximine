@@ -12,7 +12,6 @@
         <Compile Include="Db\Sentence.fs" />
         <Compile Include="Db\Word.fs" />
         <Compile Include="Db\WordSentence.fs" />
-        <Compile Include="DbLeximine.fs" />
         <Compile Include="Book.fs" />
         <Compile Include="Fb2Parser.fs" />
         <Compile Include="SentenceParser.fs" />

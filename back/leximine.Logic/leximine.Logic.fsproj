@@ -6,13 +6,16 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Compile Include="Helpers\Helpers.fs" />
         <Compile Include="Db\Book.fs" />
         <Compile Include="Db\Sentence.fs" />
         <Compile Include="Db\Word.fs" />
         <Compile Include="Db\WordSentence.fs" />
-        <Compile Include="Helpers.fs" />
+        <Compile Include="FileParsers\Main.fs" />
+        <Compile Include="FileParsers\Fb2.fs" />
         <Compile Include="StringHelpers.fs" />
         <Compile Include="DbFileHelper.fs" />
+        <Compile Include="Core.fs" />
     </ItemGroup>
 
     <ItemGroup>

@@ -39,7 +39,7 @@
     <p>Here you can manage your databases.</p>
 
     {#if mainDb}
-        <CurrentDatabase fileName={mainDb.fileName} size={mainDb.size} 
+        <CurrentDatabase fileName={mainDb.fileName} size={mainDb.size}
             on:backup={createBackup} />
     {/if}
 

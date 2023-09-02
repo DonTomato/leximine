@@ -1,11 +1,10 @@
-module leximine.Fb2Parser
+﻿module leximine.Logic.FileParsers.Fb2
 
-open System.IO
-open System.Text
 open System.Xml.Linq
+open leximine.Logic.FileParsers.Main
 
 let load (fn: string) =
-    XDocument.Load fn;
+    XDocument.Load fn
 
 let parseData (data: XDocument) =
     let ns = data.Root.GetDefaultNamespace()
@@ -36,8 +35,10 @@ let parseData (data: XDocument) =
     let body = data.Root |> getChildNode "body"
 
     {
-        Book.BookData.Title = titleInfo |> getChildValue "book-title";
-        Book.BookData.Author = (author |> getChildValue "first-name", author |> getChildValue "last-name")
+        BookData.Title = titleInfo |> getChildValue "book-title";
+        BookData.Author = (author |> getChildValue "first-name", author |> getChildValue "last-name")
             |> fun (fn, ln) -> $"%s{fn} %s{ln}";
-        Book.BookData.Paragraphs = getParagraphs body;
+        BookData.Sentences = getParagraphs body
+                             |> List.map (fun p -> textToSentences p)
+                             |> List.concat
     }
