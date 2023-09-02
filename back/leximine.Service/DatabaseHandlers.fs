@@ -17,7 +17,7 @@ let getDbListHandler ln =
             let mainDb = dbs |> List.find (fun x -> x.FileName = "leximine.db")
             let response = {|
                 MainDb = mainDb
-                Backups = dbs |> List.filter (fun x -> x <> mainDb)
+                Backups = dbs |> List.filter (fun x -> x <> mainDb) |> List.sortByDescending (fun x -> x.FileName)
             |}
             return! json response next ctx
         }
