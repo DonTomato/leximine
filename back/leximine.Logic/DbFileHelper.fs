@@ -2,6 +2,8 @@ module leximine.Logic.DbFileHelper
 
 open System
 open System.IO
+open leximine.SqliteDb
+
 let private root = @"c:\data\leximine\"
 let private dbFileName = "leximine.db"
 
@@ -22,8 +24,12 @@ let getCurrentDbFileName ln =
 let initDb ln =
     let currentDbf = getCurrentDbFileName ln
     if not <| File.Exists currentDbf then
-        let originalDbf = Path.Combine(root, dbFileName)
-        File.Copy(originalDbf, currentDbf)
+        let db = createCn currentDbf
+        let currectPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)
+        let sqlPath = Path.Combine(currectPath, @"..\..\..\..\..\", "sql", "initial_db.sql")
+        let data = File.ReadAllText sqlPath
+        db |> command data |> execute |> ignore
+
 
 let getDbList ln =
     initDb ln

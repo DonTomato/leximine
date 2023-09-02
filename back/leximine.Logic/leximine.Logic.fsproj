@@ -6,6 +6,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Compile Include="Db\Book.fs" />
+        <Compile Include="Db\Sentence.fs" />
+        <Compile Include="Db\Word.fs" />
+        <Compile Include="Db\WordSentence.fs" />
         <Compile Include="Helpers.fs" />
         <Compile Include="StringHelpers.fs" />
         <Compile Include="DbFileHelper.fs" />
@@ -13,6 +17,10 @@
 
     <ItemGroup>
       <PackageReference Include="System.Data.HashFunction.Jenkins" Version="2.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\leximine.SqliteDb\leximine.SqliteDb.fsproj" />
     </ItemGroup>
 
 </Project>
