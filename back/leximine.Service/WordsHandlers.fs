@@ -17,3 +17,13 @@ let getWordsHandler ln filter =
             let data = getWordsPage ln filter
             return! json data next ctx
         }
+
+let setWordKnownHandler ln known =
+    fun (next: HttpFunc) (ctx: HttpContext) ->
+        task {
+            let! words = ctx.BindJsonAsync<string array>()
+            let wa = words |> Array.toList
+            setWordKnown ln wa known
+            |> ignore
+            return! Successful.OK "" next ctx
+        }

@@ -16,6 +16,8 @@
             <div class="actions">
                 {#if !word.known}
                     <button class="lx-btn" on:click={() => dispatch('bacameKnown', word)}>Make Known</button>
+                {:else}
+                    <button class="lx-btn" on:click={() => dispatch('becameUnknown', word)}>Make unknown</button>
                 {/if}
             </div>
         </div>
@@ -33,7 +35,7 @@
             display: flex;
 
             &.known {
-                background-color: #1f7a1f;
+                background-color: #eafcea;
             }
 
             .word {
@@ -51,7 +53,9 @@
             }
 
             .actions {
-                padding-left: 4rem;
+                flex: 4 0 0;
+                display: flex;
+                justify-content: flex-end;
             }
         }
     }

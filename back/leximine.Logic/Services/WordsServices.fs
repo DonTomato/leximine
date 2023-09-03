@@ -94,3 +94,18 @@ let getWordsPage ln filter =
         DefaultForm = read.string "default_form"
         Known = read.int "known" = 1
     })
+
+let setWordKnown ln (words: string list) known =
+    let cn = createCn (getCurrentDbFileName ln)
+
+    use t = cn |> transaction
+
+    words |> List.iter (fun w ->
+        cn
+        |> command "UPDATE word SET known = $known WHERE word_id = $wordId"
+        |> addParameter "$known" (if known then 1 else 0)
+        |> addParameter "$wordId" w
+        |> execute
+        |> ignore)
+
+    t |> commit

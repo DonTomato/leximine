@@ -26,6 +26,8 @@ let webApp =
         GET     >=> routef "/%s/words/all/%i" (fun (ln, page) -> WordsHandlers.getWordsHandler ln (WordFilterType.All page))
         GET     >=> routef "/%s/words/known/%i" (fun (ln, page) -> WordsHandlers.getWordsHandler ln (WordFilterType.Known page))
         GET     >=> routef "/%s/words/unknown/%i" (fun (ln, page) -> WordsHandlers.getWordsHandler ln (WordFilterType.Unknown page))
+        POST    >=> routef "/%s/words/make/known" (fun ln -> WordsHandlers.setWordKnownHandler ln true)
+        POST    >=> routef "/%s/words/make/unknown" (fun ln -> WordsHandlers.setWordKnownHandler ln false)
 
         // route "/req"    >=> json { Response.result = 10
         //                            Response.success = true }
