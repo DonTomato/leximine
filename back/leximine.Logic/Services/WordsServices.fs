@@ -45,7 +45,7 @@ let getInitData ln =
                                         SELECT COALESCE(
                                             (SELECT RowNumber
                                              FROM WordRows
-                                             WHERE known = 1
+                                             WHERE known = 0
                                              LIMIT 1),
                                             1
                                         ) as result;"

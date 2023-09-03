@@ -4,10 +4,12 @@
     import { store } from "../stores/store";
     import { get, post } from "../lib/api";
     import type { InitResponse, WordsPageRecord } from "./models";
+    import Paginator from "./Paginator.svelte";
 
     let totalCount: number;
     let knownCount: number;
     let pageIndex: number;
+    let pageSize: number;
     let lang: string;
 
     let words: WordsPageRecord[];
@@ -26,6 +28,7 @@
         totalCount = response.totalCount;
         knownCount = response.knownCount;
         pageIndex = response.initialPageIndex;
+        pageSize = response.pageSize;
         
         await getWords();
     }
@@ -47,6 +50,11 @@
         word.known = false;
         words = words;
     }
+
+    async function changePage(event: CustomEvent<number>) {
+        pageIndex = event.detail;
+        await getWords();
+    }
 </script>
 
 <h1 class="page-header">Words</h1>
@@ -54,6 +62,10 @@
 <WordList {words} 
     on:bacameKnown={makeKnown}
     on:becameUnknown={makeUnknown} />
+
+<Paginator {pageSize} {totalCount} 
+    bind:index={pageIndex}
+    on:page={changePage} />
 
 <style lang="scss">
     
