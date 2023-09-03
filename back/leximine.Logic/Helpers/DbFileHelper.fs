@@ -1,4 +1,4 @@
-module leximine.Logic.DbFileHelper
+module leximine.Logic.Helpers.DbFileHelper
 
 open System
 open System.IO

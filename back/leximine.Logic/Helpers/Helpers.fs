@@ -1,4 +1,4 @@
-﻿module leximine.Logic.Helpers
+﻿module leximine.Logic.Helpers.Common
 
 open System.Data.HashFunction.Jenkins
 open System.Text

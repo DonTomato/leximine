@@ -1,6 +1,6 @@
 ﻿module leximine.Logic.FileParsers.Main
 
-open leximine.Logic.Helpers
+open leximine.Logic.Helpers.Common
 
 type BookData = {
     Title: string
