@@ -1,7 +1,7 @@
 ﻿module leximine.Logic.Services.WordsServices
 
 open leximine.SqliteDb
-open leximine.Logic.Helpers.DbFileHelper
+open leximine.Logic.Services.DbFileServices
 
 let private pageSize = 10
 
@@ -13,7 +13,7 @@ type InitResponse = {
     TotalPages: int
 }
 
-type WordsPageResponse = {
+type WordsPageRecord = {
     Word: string
     TotalCount: int
     DefaultForm: string
@@ -26,13 +26,14 @@ type WordFilterType =
     | Unknown of int
 
 let getInitData ln =
-    let cn = createCn (getCurrentDbFileName ln)
+    let cn = getCurrentDbFileName ln
+             |> createCn
     let totalCount = cn
-                     |> command "SELECT count(*) FROM words"
+                     |> command "SELECT count(*) FROM word"
                      |> queryScalar toInt
 
     let knownCount = cn
-                     |> command "SELECT count(*) FROM words WHERE known = 1"
+                     |> command "SELECT count(*) FROM word WHERE known = 1"
                      |> queryScalar toInt
 
     let rowNumberOfFirstUnknown = cn
