@@ -20,8 +20,7 @@ let myHandler =
             let! person = ctx.BindJsonAsync<MyRequest>()
             let result = {
                 Result = person.A + person.B
-                Success = true 
+                Success = true
             }
             return! json result next ctx
         }
-        

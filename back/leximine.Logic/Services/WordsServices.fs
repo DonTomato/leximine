@@ -109,3 +109,18 @@ let setWordKnown ln (words: string list) known =
         |> ignore)
 
     t |> commit
+
+let setWordKnownAllBefore ln word =
+    let cn = createCn (getCurrentDbFileName ln)
+
+    use t = cn |> transaction
+
+    cn
+    |> command @"
+        UPDATE word SET known = 1
+        WHERE total_count >= (SELECT total_count FROM word WHERE word_id = $wordId)"
+    |> addParameter "$wordId" word
+    |> execute
+    |> ignore
+
+    t |> commit

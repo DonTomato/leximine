@@ -27,3 +27,11 @@ let setWordKnownHandler ln known =
             |> ignore
             return! Successful.OK "" next ctx
         }
+
+let setWordKnownAllBeforeHandler ln word =
+    fun (next: HttpFunc) (ctx: HttpContext) ->
+        task {
+            setWordKnownAllBefore ln word
+            |> ignore
+            return! Successful.OK "" next ctx
+        }
