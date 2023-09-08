@@ -11,7 +11,7 @@
 
     async function onChange() {
         await tick();
-        dispatch('page', index + 1)
+        dispatch('page', index)
     }
 </script>
 
@@ -24,7 +24,7 @@
         Prev
     </button>
     <!-- <span class="current">{index}</span> -->
-    <input type="number" min="1" max={lastPage + 1} bind:value={index} on:change={onChange}>
+    <input type="number" class="lx-input current" min="1" max={lastPage + 1} bind:value={index} on:change={onChange}>
     <button 
         class="lx-btn"
         disabled={index === totalCount - 2}
@@ -44,6 +44,7 @@
     }
 
     .current {
-        padding: 0 2rem;
+        // padding: 0 2rem;
+        width: auto;
     }
 </style>

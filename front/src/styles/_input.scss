@@ -1,0 +1,31 @@
+.lx-input {
+    background-color: #ffffff;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    color: #333;
+    margin-bottom: 0;
+    padding: 0.7rem 0.8rem;
+    text-align: left;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 100%;
+
+    &:hover {
+        border-color: #98adff;
+    }
+
+    &:active {
+        color: #131313;
+    }
+
+    &:focus {
+        outline: 2px solid #98adff;
+        outline-offset: 2px;
+    }
+
+    &:disabled {
+        background-color: #e6e6e6;
+        color: #333;
+        cursor: default;
+    }
+}
