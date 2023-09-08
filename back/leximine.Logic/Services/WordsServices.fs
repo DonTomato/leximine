@@ -14,6 +14,7 @@ type InitResponse = {
 }
 
 type WordsPageRecord = {
+    No: int
     Word: string
     TotalCount: int
     DefaultForm: string
@@ -80,7 +81,8 @@ let getWordsPage ln filter =
 
     cn
     |> command $@"
-        SELECT word_id, total_count, default_form, known
+        SELECT word_id, total_count, default_form, known,
+               ROW_NUMBER() OVER (ORDER BY total_count DESC) AS RowNumber
         FROM word
         {filterClause}
         ORDER BY total_count DESC
@@ -89,6 +91,7 @@ let getWordsPage ln filter =
     |> addParameter "$pageSize" pageSize
     |> addParameter "$offsetIndex" (pageIndex * pageSize)
     |> query (fun read -> {
+        No = read.int "RowNumber"
         Word = read.string "word_id"
         TotalCount = read.int "total_count"
         DefaultForm = read.string "default_form"
@@ -113,8 +116,6 @@ let setWordKnown ln (words: string list) known =
 let setWordKnownAllBefore ln word =
     let cn = createCn (getCurrentDbFileName ln)
 
-    use t = cn |> transaction
-
     cn
     |> command @"
         UPDATE word SET known = 1
@@ -123,4 +124,13 @@ let setWordKnownAllBefore ln word =
     |> execute
     |> ignore
 
-    t |> commit
+let setWordUnknownAllAfter ln word =
+    let cn = createCn (getCurrentDbFileName ln)
+
+    cn
+    |> command @"
+        UPDATE word SET known = 0
+        WHERE total_count <= (SELECT total_count FROM word WHERE word_id = $wordId)"
+    |> addParameter "$wordId" word
+    |> execute
+    |> ignore

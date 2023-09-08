@@ -10,6 +10,7 @@
 <div class="list-container">
     {#each words as word}
         <div class="item" class:known={word.known}>
+            <div class="no">{word.no}</div>
             <div class="word">{word.word}</div>
             <div class="def">{word.defaultForm}</div>
             <div class="total lx-mono">{word.totalCount}</div>
@@ -36,6 +37,10 @@
 
             &.known {
                 background-color: #eafcea;
+            }
+
+            .no {
+                flex: 1 0 0;
             }
 
             .word {

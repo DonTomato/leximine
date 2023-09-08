@@ -52,7 +52,7 @@
     }
 
     async function changePage(event: CustomEvent<number>) {
-        pageIndex = event.detail;
+        pageIndex = event.detail - 1;
         await getWords();
     }
 </script>
@@ -64,7 +64,7 @@
     on:becameUnknown={makeUnknown} />
 
 <Paginator {pageSize} {totalCount} 
-    bind:index={pageIndex}
+    index={pageIndex + 1}
     on:page={changePage} />
 
 <style lang="scss">

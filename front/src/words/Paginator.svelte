@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { createEventDispatcher } from "svelte";
+    import { createEventDispatcher, tick } from "svelte";
 
     const dispatch = createEventDispatcher();
 
@@ -8,24 +8,30 @@
     export let index: number;
 
     $: lastPage = Math.ceil(totalCount / pageSize) - 1;
+
+    async function onChange() {
+        await tick();
+        dispatch('page', index + 1)
+    }
 </script>
 
 <div class="paginator">
-    <button class="lx-btn" on:click={() => dispatch('page', 0)}>1</button>
+    <button class="lx-btn" on:click={() => dispatch('page', 1)}>1</button>
     <button
         class="lx-btn"
-        disabled={index === 0}
+        disabled={index === 1}
         on:click={() => dispatch("page", index - 1)}>
         Prev
     </button>
-    <span class="current">{index + 1}</span>
+    <!-- <span class="current">{index}</span> -->
+    <input type="number" min="1" max={lastPage + 1} bind:value={index} on:change={onChange}>
     <button 
         class="lx-btn"
-        disabled={index === totalCount - 1}
+        disabled={index === totalCount - 2}
         on:click={() => dispatch("page", index + 1)}>
         Next
     </button>
-    <button class="lx-btn" on:click={() => dispatch('page', lastPage)}>{lastPage + 1}</button>
+    <button class="lx-btn" on:click={() => dispatch('page', lastPage + 1)}>{lastPage + 1}</button>
 </div>
 
 <style lang="scss">

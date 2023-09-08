@@ -7,6 +7,7 @@ export interface InitResponse {
 }
 
 export interface WordsPageRecord {
+    no: number;
     word: string;
     totalCount: number;
     defaultForm: string;
