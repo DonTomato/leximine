@@ -1,6 +1,7 @@
 <script lang="ts">
     import { createEventDispatcher } from "svelte";
     import type { WordsPageRecord } from "./models";
+  import Dropdown from "../lib/Dropdown.svelte";
 
     export let words: WordsPageRecord[] = [];
 
@@ -20,6 +21,15 @@
                 {:else}
                     <button class="lx-btn" on:click={() => dispatch('becameUnknown', word)}>Make unknown</button>
                 {/if}
+
+                <div class="menu">
+                    <Dropdown items={[
+                        { id: '1', text: 'One' },
+                        { id: '2', text: 'Two' },
+                        { id: '3', text: 'Three' },
+                        { id: '4', text: 'Special item' }
+                    ]} />
+                </div>
             </div>
         </div>
     {/each}
@@ -61,6 +71,10 @@
                 flex: 4 0 0;
                 display: flex;
                 justify-content: flex-end;
+
+                > .menu {
+                    margin-left: 1rem;
+                }
             }
         }
     }
