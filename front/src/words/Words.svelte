@@ -55,13 +55,27 @@
         pageIndex = event.detail - 1;
         await getWords();
     }
+
+    async function makeKnownAllBefore(event: CustomEvent<string>) {
+        const word = event.detail;
+        await post(`${lang}/words/make/known/before/${word}`, null);
+        await getWords();
+    }
+
+    async function makeUnknownAllAfter(event: CustomEvent<string>) {
+        const word = event.detail;
+        await post(`${lang}/words/make/unknown/after/${word}`, null);
+        await getWords();
+    }
 </script>
 
 <h1 class="page-header">Words</h1>
 
 <WordList {words} 
     on:bacameKnown={makeKnown}
-    on:becameUnknown={makeUnknown} />
+    on:becameUnknown={makeUnknown}
+    on:makeKnownBefore={makeKnownAllBefore}
+    on:makeUnknownAfter={makeUnknownAllAfter} />
 
 <Paginator {pageSize} {totalCount} 
     index={pageIndex + 1}

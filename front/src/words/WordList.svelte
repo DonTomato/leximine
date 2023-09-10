@@ -1,11 +1,23 @@
 <script lang="ts">
     import { createEventDispatcher } from "svelte";
     import type { WordsPageRecord } from "./models";
-  import Dropdown from "../lib/Dropdown.svelte";
+    import Dropdown from "../lib/Dropdown.svelte";
 
     export let words: WordsPageRecord[] = [];
 
     const dispatch = createEventDispatcher();
+
+    function runAction(action: string, word: string) {
+        // dispatch('runAction', { action, word });
+        switch (action) {
+            case 'knownbefore':
+                dispatch('makeKnownBefore', word);
+                break;
+            case 'unknownafter':
+                dispatch('makeUnknownAfter', word);
+                break;
+        }
+    }
 </script>
 
 <div class="list-container">
@@ -24,11 +36,9 @@
 
                 <div class="menu">
                     <Dropdown items={[
-                        { id: '1', text: 'One' },
-                        { id: '2', text: 'Two' },
-                        { id: '3', text: 'Three' },
-                        { id: '4', text: 'Special item' }
-                    ]} />
+                        { id: 'knownbefore', text: 'Make known all before' },
+                        { id: 'unknownafter', text: 'Make unknown all after' }
+                    ]} on:itemClick={(event) => runAction(event.detail, word.word)} />
                 </div>
             </div>
         </div>

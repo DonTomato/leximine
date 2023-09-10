@@ -97,7 +97,7 @@
             flex-direction: column;
             gap: 0.25rem;
             padding: 0.25rem 0;
-            min-width: 100px;
+            min-width: 16rem;
 
             > button {
                 border: 0;
